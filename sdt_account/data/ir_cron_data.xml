@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record forcecreate="True" id="ir_cron_ftp_sync_action" model="ir.cron">
+        <field name="name">Import Invoices FTP</field>
+        <field name="model_id" ref="model_ftp_sync"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="code">model.ftp_syning_import_invoice_cron()</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+    <record forcecreate="True" id="ir_cron_inv_bill_generataion" model="ir.cron">
+        <field name="name">Create Invoices/Bills</field>
+        <field name="model_id" ref="model_ftp_data"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="code">model.generate_inv_bills_cron()</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="False"/>
+    </record>
+    <record forcecreate="True" id="ir_cron_cd_status" model="ir.cron">
+        <field name="name">Update CD Status on Move</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="code">model.update_cd_status_invoice_cron()</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

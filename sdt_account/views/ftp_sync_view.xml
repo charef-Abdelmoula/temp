@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ftp_sync_tree" model="ir.ui.view">
+            <field name="name">ftp.sync.tree</field>
+            <field name="model">ftp.sync</field>
+            <field name="arch" type="xml">
+                <tree string="FTP Sync">
+                    <field name="name"/>
+                    <field name="is_verified"/>
+                    <field name="ftp_url"/>
+                    <field name="type"/>
+                    <field name="read_file_from"/>
+                    <field name="move_file_to"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ftp_sync_form" model="ir.ui.view">
+            <field name="name">ftp.sync.form</field>
+            <field name="model">ftp.sync</field>
+            <field name="arch" type="xml">
+                <form string="FTP Sync">
+                    <header>
+                        <button name="action_check_ftp_connection" type="object" class="btn-primary" string="Check Connection"/>
+                        <button name="ftp_syncing_import_invoice" type="object" class="btn-primary" string="Import Invoices"/>
+                        
+                        <!-- <button name="download_sample_file" type="object" class="btn-primary" string="Download CSV"/> -->
+                    </header>
+                    <sheet>
+                        <field name="is_verified" invisible="0"/>
+                        <!-- <widget name="web_ribbon" title="Connected" bg_color="bg-success" attrs="{'invisible': [('is_verified', '=', False)]}"/>
+                        <widget name="web_ribbon" title="Not Connected" bg_color="bg-danger" attrs="{'invisible': [('is_verified', '=', True)]}"/> -->
+                        <group col="4">
+                            <field name="name" required="1"/>
+                            <field name="type" required="1"/>
+                            <field name="read_file_from" required="1"/>
+                            <field name="move_file_to" required="1"/>
+                        </group>
+                        <separator string="Credentials"/>
+                        <group col="4">
+                            <field name="ftp_url" required="1"/>
+                            <field name="ftp_username" required="1"/>
+                            <field name="ftp_password" required="1" password="True"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ftp_sync" model="ir.actions.act_window">
+            <field name="name">FTP Sync</field>
+            <field name="res_model">ftp.sync</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ftp_sync_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem id="menu_item_ftp_syncing" name="FTP Syncing" parent="wr_ftp_syncing.menu_ftp_syncing"
+                action="wr_ftp_syncing.action_ftp_syncing"/> -->
+
+    </data>
+</odoo>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_res_partner_filter_sdt" model="ir.ui.view">
+        <field name="name">partner.search.view.sdt</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position='replace'>
+                <field name="name" filter_domain="['|','|','|',('venice_supnum','ilike',self),('display_name','ilike',self),('ref','=',self),('email','ilike',self)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ppc_partner_tree_view_main" model="ir.ui.view">
+        <field name="name">partner.tree.view.ppc</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position='before'>
+                <field name="venice_supnum" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="partner_form_view_main_sdt" model="ir.ui.view">
+        <field name="name">partner.form.view.ppc</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position='before'>
+                <page name='paper_smart' string='PaperSmart' attrs="{'invisible':[('sdt_section','!=','papersmart')]}">
+                    <group>
+                        <group name='smart_1'>
+                            <field name="ppc_user_imported"/>
+                            <field name="ppv_vendor_imported"/>
+                            <field name="ppc_created"/>
+                            <field name="ppc_updated"/>
+                            <field name="ppc_lastsign"/>
+                            <field name="ppc_name"/>
+                            <field name="ppc_vorname"/>
+                            <field name="ppc_nachname"/>
+                            <field name="ppc_anrede"/>
+                            <field name="ppc_email"/>
+                            <field name="ppc_customernumber"/>
+                            <field name="ppc_company"/>
+                            <field name="ppc_business"/>
+                            <field name="ppc_customer"/>
+                        </group>
+                        <group name='smart_2'>
+                            <field name="ppc_bill_name"/>
+                            <field name="ppc_bill_company"/>
+                            <field name="ppc_bill_street"/>
+                            <field name="ppc_bill_city"/>
+                            <field name="ppc_bill_zip"/>
+                            <field name="ppc_bill_country"/>
+                            <field name="ppc_bill_phone"/>
+                            <field name="ppc_bill_registrationnumber"/>
+                            <field name="ppc_bill_taxnumber"/>
+                            <field name="ppc_tax_choice"/>
+                            <field name="ppc_newsletter"/>
+                            <field name="ppc_lastshopping"/>
+                            <field name="ppc_paymenttype"/>
+                            <field name="ppc_cc_digits"/>
+                            <field name="ppc_cc_expiry"/>
+                            <field name="ppc_cc_limit"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <field name="category_id" position="after">
+                <field name="partner_type_id"/>
+            </field>
+            <field name="industry_id" position="replace"/>
+            <xpath expr="//page[@name='sales_purchases']" position='after'>
+                <page name="misc" string="Misc">
+                    <group name="page_misc_1">
+                        <group string="Misc">
+                            <field name="barcode"/>
+                            <field name="industry_id" attrs="{'invisible': [('is_company', '=', False)]}" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Office Use">
+                            <field name="department_id"/>
+                            <field name="hr_id"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='container_row_2']" position='inside'>
+                <group string="SDT Group" name="sdt_group" priority="1">
+                    <field name="ref"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name='sdt_section'/>
+                    <field name="customer_rank"/>
+                    <field name="supplier_rank"/>
+                </group>
+                <group string="Venice" name="venice" priority="2">
+                    <field name="venice"/>
+                    <field name="venice_system"/>
+                    <field name="venice_supnum" attrs="{'required': [('venice','=',True),('supplier_rank','&gt;', 0)]}"/>
+                    <field name="venice_nummer" attrs="{'required': [('venice','=',True),('customer_rank','&gt;', 0)]}"/>
+                    <field name="venice_subnummer" attrs="{'required': [('venice','=',True),('customer_rank','&gt;', 0)]}"/>
+                    <field name="audit_vat_country"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="update_ppc_customernumber" model="ir.actions.server">
+      <field name="name">Update PPC CustomerNumber</field>
+      <field name="model_id" ref="base.model_res_partner"/>
+      <field name="binding_model_id" ref="base.model_res_partner" />
+      <field name="state">code</field>
+      <field name="code">records.server_action_update_ppc_customernumber()</field>
+    </record>
+
+</odoo>
+

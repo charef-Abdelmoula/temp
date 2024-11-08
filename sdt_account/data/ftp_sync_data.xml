@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- PInvoices -->
+        <record id="pinvoice_at" model="ftp.sync">
+            <field name="name">PInvoices AT</field>
+            <field name="type">pinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/PInvoices/AT</field>
+            <field name="move_file_to">/PInvoices/PUR_ODOO/AT_OK</field>
+        </record>
+
+        <record id="pinvoice_be" model="ftp.sync">
+            <field name="name">PInvoices BE</field>
+            <field name="type">pinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/PInvoices/BE</field>
+            <field name="move_file_to">/PInvoices/PUR_ODOO/BE_OK</field>
+        </record>
+
+        <record id="pinvoice_de" model="ftp.sync">
+            <field name="name">PInvoices DE</field>
+            <field name="type">pinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/PInvoices/DE</field>
+            <field name="move_file_to">/PInvoices/PUR_ODOO/DE_OK</field>
+        </record>
+
+        <record id="pinvoice_fr" model="ftp.sync">
+            <field name="name">PInvoices FR</field>
+            <field name="type">pinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/PInvoices/FR</field>
+            <field name="move_file_to">/PInvoices/PUR_ODOO/FR_OK</field>
+        </record>
+
+        <record id="pinvoice_nl" model="ftp.sync">
+            <field name="name">PInvoices NL</field>
+            <field name="type">pinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/PInvoices/NL</field>
+            <field name="move_file_to">/PInvoices/PUR_ODOO/NL_OK</field>
+        </record>
+
+        <record id="pinvoice_zl" model="ftp.sync">
+            <field name="name">PInvoices ZL</field>
+            <field name="type">pinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/PInvoices/ZL</field>
+            <field name="move_file_to">/PInvoices/PUR_ODOO/ZL_OK</field>
+        </record>
+
+        <!-- SInvoices -->
+        <record id="sinvoice_at" model="ftp.sync">
+            <field name="name">SInvoices AT</field>
+            <field name="type">sinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/SInvoices/AT</field>
+            <field name="move_file_to">/SInvoices/SLS_ODOO/AT_OK</field>
+        </record>
+
+        <record id="sinvoice_be" model="ftp.sync">
+            <field name="name">SInvoices BE</field>
+            <field name="type">sinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/SInvoices/BE</field>
+            <field name="move_file_to">/SInvoices/SLS_ODOO/BE_OK</field>
+        </record>
+
+        <record id="sinvoice_de" model="ftp.sync">
+            <field name="name">SInvoices DE</field>
+            <field name="type">sinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/SInvoices/DE</field>
+            <field name="move_file_to">/SInvoices/SLS_ODOO/DE_OK</field>
+        </record>
+
+        <record id="sinvoice_fr" model="ftp.sync">
+            <field name="name">SInvoices FR</field>
+            <field name="type">sinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/SInvoices/FR</field>
+            <field name="move_file_to">/SInvoices/SLS_ODOO/FR_OK</field>
+        </record>
+
+        <record id="sinvoice_nl" model="ftp.sync">
+            <field name="name">SInvoices NL</field>
+            <field name="type">sinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/SInvoices/NL</field>
+            <field name="move_file_to">/SInvoices/SLS_ODOO/NL_OK</field>
+        </record>
+
+        <record id="sinvoice_zl" model="ftp.sync">
+            <field name="name">SInvoices ZL</field>
+            <field name="type">sinvoice</field>
+            <field name="active">True</field>
+            <field name="ftp_url">ftp.distri-smart.com</field>
+            <field name="ftp_username">sdt.odoo</field>
+            <field name="ftp_password">jDrDY8Q+U</field>
+            <field name="read_file_from">/SInvoices/ZL</field>
+            <field name="move_file_to">/SInvoices/SLS_ODOO/ZL_OK</field>
+        </record>
+    </data>
+</odoo>
+

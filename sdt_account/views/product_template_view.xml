@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_product_analytic_product_form" model="ir.ui.view">
+        <field name="name">product.template.analytic.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <div>
+                    <field name="analytic_product" readonly="1"/>
+                    <label for="analytic_product"/>
+                </div>
+                <div>
+                    <field name="distrismart"/>
+                    <label for="distrismart"/>
+                </div>
+            </div>
+            <field name="type" position='before'>
+                <field name='ds_vendor' attrs="{'invisible': [('distrismart','=',False)]}" widget='one2many_list'>
+                    <tree>
+                        <field name='name'/>
+                        <field name='phone'/>
+                        <field name='email'/>
+                    </tree>
+                </field>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_analytic_product_tree" model="ir.ui.view">
+        <field name="name">product.template.analytic.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name='name' position='after'>
+                <field name='account_analytic_id'/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_only_form_view_sdt" model="ir.ui.view">
+        <field name="name">product.template.product.form.sdt</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name='default_code' position='after'>
+                <field name='ds_ref_de' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_be' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_nl' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_fr' attrs="{'invisible': [('distrismart','=',False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_form_view_sdt" model="ir.ui.view">
+        <field name="name">product.template.product.form.view.sdt</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="account.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='accounting']" position="after">
+                <group>
+                    <group string="Analytic Accounting">
+                        <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                    </group>
+                    <group >
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='bill']" position="after">
+                <group name="cash_discount">
+                    <field name="cashdiscount_account_id"/>
+                    <field name="cashdiscount_account_label"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="product_analytic_product_tree_sdt" model="ir.ui.view">
+        <field name="name">product.product.analytic.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="account.product_product_view_tree"/>
+        <field name="arch" type="xml">
+            <field name='name' position='after'>
+                <field name='account_analytic_id'/>
+            </field>
+        </field>
+    </record> -->
+
+    <record id="product_normal_form_view_sdt" model="ir.ui.view">
+        <field name="name">product.product.form.sdt</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <field name='default_code' position='after'>
+                <field name='ds_ref_de' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_be' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_nl' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_fr' attrs="{'invisible': [('distrismart','=',False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_product_analytic_tree" model="ir.ui.view">
+        <field name="name">product.product.analytic.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name='name' position='after'>
+                <field name='account_analytic_id'/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

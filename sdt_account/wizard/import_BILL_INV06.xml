@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_import_bill_inv06_form" model="ir.ui.view">
+        <field name="name">import.bill.inv06.form</field>
+        <field name="model">import.bill.inv06</field>
+        <field name="arch" type="xml">
+            <form string="Import Bill and Refunds INV06">
+                <group>
+                     <div attrs="{'invisible':[('import_warning','!=',False)]}" class="oe_grey" colspan="4">
+                        A Valid file will contains following headers.
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="text-right"><span>Country</span></th>
+                                    <th class="text-right"><span>Book</span></th>
+                                    <th class="text-right"><span>Document type</span></th>
+                                    <th class="text-right"><span>Document number</span></th>
+                                    <th class="text-right"><span>purchase order no.</span></th>
+                                    <th class="text-right"><span>sales order no.</span></th>
+                                    <th class="text-right"><span>Document date</span></th>
+                                    <th class="text-right"><span>Supplier number</span></th>
+                                    <th class="text-right"><span>Supplier Name</span></th>
+                                    <th class="text-right"><span>Remark (vendor invoice number)</span></th>
+                                    <th class="text-right"><span>VAT system</span></th>
+                                    <th class="text-right"><span>amount ex-VAT (VAT rate #1)</span></th>
+                                    <th class="text-right"><span>amount ex-VAT (VAT rate #2)</span></th>
+                                    <th class="text-right"><span>amount ex-VAT (VAT rate #3)</span></th>
+                                    <th class="text-right"><span>amount ex-VAT (VAT rate #4)</span></th>
+                                </tr>
+                            </thead>
+                        </table>
+                     </div>
+                </group>
+                <group>
+                    <field name="company_id" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="product1_id" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="product2_id" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="product3_id" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="product4_id" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="journal_id" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="file" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <field name="import_warning" readonly="1" attrs="{'invisible':[('import_warning','=',False)]}"/>
+                </group>
+                <footer>
+                    <button name="do_import_bill_inv06" string="Import Invoices (xls)" class="oe_highlight" type="object" attrs="{'invisible':[('import_warning','!=',False)]}"/>
+                    <button name="cancel" special="cancel" string="Close" class="oe_link" attrs="{'invisible':[('import_warning','=',False)]}"/>
+                    or
+                    <button name="cancel" special="cancel" string="Cancel" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_bill_inv06" model="ir.actions.act_window">
+        <field name="name">Import Bills and Refunds Inv06</field>
+        <field name="res_model">import.bill.inv06</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+
+        <menuitem 
+            name="Imports Bills and Refunds INV06"
+            id="menu_imports_bill_inv06_header"
+            parent="menu_imports_header"
+            action="action_import_bill_inv06"
+            sequence="20"/>
+
+</odoo>

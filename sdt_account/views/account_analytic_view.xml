@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_analytic_line_form_sdt" model="ir.ui.view">
+        <field name="name">account.analytic.line.sdt</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="journal_id"/>
+                <field name="analytic_client"/>
+                <field name="department_id"/>
+                <field name="period_id"/>
+                <field name="hr_id"/>
+            </xpath>
+            <group name="amount" position="after">
+                <group name="country_allocation" string="Country Allocation">
+                    <field name="no_split"/>
+                    <field name="country_allocation" domain="[('active','=', True),('verification','=', True)]"/>
+                    <field name="amount_de"/>
+                    <field name="amount_be"/>
+                    <field name="amount_nl"/>
+                    <field name="amount_fr"/>
+                    <field name="de"/>
+                    <field name="be"/>
+                    <field name="nl"/>
+                    <field name="fr"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_line_tree_inherit_account_sdt" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.inherit.account.sdt</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="account.view_account_analytic_line_tree_inherit_account"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="ref" position="replace"/>
+            </data>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_line_tree_sdt" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.inherit.sdt</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="name" position="replace"/>
+                <field name="unit_amount" position="replace"/>
+                <field name="amount" position="replace"/>
+                <field name="company_id" position="before">
+                    <field name="amount" sum="Total"/>
+                </field>
+                <xpath expr="//field[@name='account_id']" position="after">
+                    <field name="partner_id"/>
+                    <field name="analytic_client"/>
+                    <field name="name"/>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="amount_de" sum="DE Total"/>
+                    <field name="amount_be" sum="BE Total"/>
+                    <field name="amount_nl" sum="NL Total"/>
+                    <field name="department_id"/>
+                    <field name="period_id"/>
+                    <field name="hr_id"/>
+                    <field name="ref" invisible="context.get('to_invoice', False)"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_line_filter_sdt" model="ir.ui.view">
+        <field name="name">account.analytic.line.select</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='account_id']" position="after">
+                <field name="analytic_client"/>
+                <field name="department_id"/>
+                <field name="period_id"/>
+                <field name="hr_id"/>
+                <field name="journal_id"/>
+            </xpath>
+            <xpath expr="//filter[@name='account_id']" position="after">
+                <filter string="Analytic Client" context="{'group_by':'analytic_client'}" name="group_analytic_client"/>
+                <filter string="Department" context="{'group_by':'department_id'}" name="group_department"/>
+                <filter string="Period" context="{'group_by':'period_id'}" name="group_period"/>
+                <filter string="HR" context="{'group_by':'hr_id'}" name="group_hr"/>
+                <filter string="Journal" context="{'group_by':'journal_id'}" name="group_journal"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="update_analytic_client" model="ir.actions.server">
+      <field name="name">Update Analytic Client</field>
+      <field name="model_id" ref="analytic.model_account_analytic_line"/>
+      <field name="binding_model_id" ref="analytic.model_account_analytic_line" />
+      <field name="state">code</field>
+      <field name="code">records.server_action_update_analytic_client()</field>
+    </record>
+
+    <record id="account_analytic_tag_form_view_sdt" model="ir.ui.view">
+        <field name="name">account.analytic.tag.form.sdt</field>
+        <field name="model">account.analytic.tag</field>
+        <field name="inherit_id" ref="analytic.account_analytic_tag_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="category_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

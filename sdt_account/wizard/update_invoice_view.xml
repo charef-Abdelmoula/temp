@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_invoice_kanban_state_view" model="ir.ui.view">
+        <field name="name">update.invoice.kanban.state.form</field>
+        <field name="model">update.invoice.kanban.state</field>
+        <field name="arch" type="xml">
+            <form string="Update Kanban State">
+                <p class="oe_grey">
+                    This wizard will allows you to update kanban state on selected invoices.
+                </p>
+                <group>
+                    <field name="kanban_state" widget="state_selection" class="ml-auto"/>
+                </group>
+                <footer>
+                    <button string="Update Invoices" name="update_kanban_state" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_invoice_kanban_state" model="ir.actions.act_window">
+        <field name="name">Update Kanban State</field>
+        <field name="res_model">update.invoice.kanban.state</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+    </record>
+
+    <record id="set_payment_type_view" model="ir.ui.view">
+        <field name="name">set.payment.type.form</field>
+        <field name="model">set.payment.type</field>
+        <field name="arch" type="xml">
+            <form string="Update Payment Type">
+                <p class="oe_grey">
+                    This wizard will allows you to update payment reference and payment type.
+                </p>
+                <group>
+                    <field name="payment_type"/>
+                </group>
+                <footer>
+                    <button string="Update Invoices" name="update_payment_type" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_set_payment_type" model="ir.actions.act_window">
+        <field name="name">Set Payment Type</field>
+        <field name="res_model">set.payment.type</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+    </record>
+
+    <record id="manual_audit_status_view" model="ir.ui.view">
+        <field name="name">manual.audit.status.form</field>
+        <field name="model">manual.audit.status</field>
+        <field name="arch" type="xml">
+            <form string="Update Payment Type">
+                <p class="oe_grey">
+                    This wizard will change the Audit Status to “Manually Audited” only if the status is “To check" or "Audited”. Do you want to continue?
+                </p>
+                <footer>
+                    <button string="Update Audit Status" name="update_audit_status" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_manual_audit_status" model="ir.actions.act_window">
+        <field name="name">Manually Audited</field>
+        <field name="res_model">manual.audit.status</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+    </record>
+
+</odoo>

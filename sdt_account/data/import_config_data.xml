@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+<!-- DE: __export__.res_company_2_ff62757c
+BE: base.main_company
+NL: __export__.res_company_3_dfccbccf -->
+        <!-- DE -->
+        <record id="de_sls_ma_invoice_1" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">MA</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+            <field name="journal_id" ref="__export__.account_journal_8_c3f31122"/>
+        </record>
+
+        <record id="de_sls_macn_creditnote" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">MACN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+            <field name="journal_id" ref="__export__.account_journal_8_c3f31122"/>
+        </record>
+
+        <record id="de_sls_sls_invoice" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">SLS</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_scn_creditnote" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">SCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_amz_invoice" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">AMZ</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_amzcn_creditnote" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">AMZCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_scmp_invoice" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">SCMP</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_scncmp_creditnote" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">SCNCMP</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_kfl_invoice" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">KFL</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_sls_kflcn_creditnote" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">SLS</field>
+            <field name="book">KFLCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_pur_pur_invoice" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">PUR</field>
+            <field name="book">PUR</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <record id="de_pur_pcn_creditnote" model="import.config">
+            <field name="country">DE</field>
+            <field name="type">PUR</field>
+            <field name="book">PCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_2_ff62757c"/>
+        </record>
+
+        <!-- BE -->
+        <record id="be_sls_sls_invoice" model="import.config">
+            <field name="country">BE</field>
+            <field name="type">SLS</field>
+            <field name="book">SLS</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="be_sls_scn_creditnote" model="import.config">
+            <field name="country">BE</field>
+            <field name="type">SLS</field>
+            <field name="book">SCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="be_sls_ma_invoice" model="import.config">
+            <field name="country">BE</field>
+            <field name="type">SLS</field>
+            <field name="book">MA</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="be_sls_macn_creditnote" model="import.config">
+            <field name="country">BE</field>
+            <field name="type">SLS</field>
+            <field name="book">MACN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="be_pur_pur_invoice" model="import.config">
+            <field name="country">BE</field>
+            <field name="type">PUR</field>
+            <field name="book">PUR</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="be_pur_pcn_creditnote" model="import.config">
+            <field name="country">BE</field>
+            <field name="type">PUR</field>
+            <field name="book">PCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- NL -->
+        <record id="nl_sls_sls_invoice" model="import.config">
+            <field name="country">NL</field>
+            <field name="type">SLS</field>
+            <field name="book">SLS</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_3_dfccbccf"/>
+        </record>
+
+        <record id="nl_sls_scn_creditnote" model="import.config">
+            <field name="country">NL</field>
+            <field name="type">SLS</field>
+            <field name="book">SCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_3_dfccbccf"/>
+        </record>
+
+        <record id="nl_sls_ma_invoice" model="import.config">
+            <field name="country">NL</field>
+            <field name="type">SLS</field>
+            <field name="book">MA</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_3_dfccbccf"/>
+        </record>
+
+        <record id="nl_sls_macn_creditnote" model="import.config">
+            <field name="country">NL</field>
+            <field name="type">SLS</field>
+            <field name="book">MACN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_3_dfccbccf"/>
+        </record>
+
+        <record id="nl_pur_pur_invoice" model="import.config">
+            <field name="country">NL</field>
+            <field name="type">PUR</field>
+            <field name="book">PUR</field>
+            <field name="document_type">invoice</field>
+            <field name="company_id" ref="__export__.res_company_3_dfccbccf"/>
+        </record>
+
+        <record id="nl_pur_pcn_creditnote" model="import.config">
+            <field name="country">NL</field>
+            <field name="type">PUR</field>
+            <field name="book">PCN</field>
+            <field name="document_type">creditnote</field>
+            <field name="company_id" ref="__export__.res_company_3_dfccbccf"/>
+        </record>
+    </data>
+</odoo>
+

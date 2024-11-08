@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="link_payment_to_move" model="ir.actions.server">
+        <field name="name">Link Payment to Invoice/Bill</field>
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="binding_model_id" ref="account.model_account_payment" />
+        <field name="state">code</field>
+        <field name="code">records.server_action_link_payment_to_move()</field>
+    </record>
+
+    <record id="view_account_payment_register_form_sdt" model="ir.ui.view">
+        <field name="name">account.payment.form.sdt</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name='move_id' position='after'>
+                <field name='account_move'/>
+            </field>
+            <xpath expr="//group[@name='group3']" position='after'>
+                <group name='cash_discount'>
+                    <field name="cashdiscount_total" attrs="{'invisible': [('cashdiscount_total', '=', 0)]}"/>
+                    <field name="cashdiscount_notes" attrs="{'invisible': [('cashdiscount_total', '=', 0)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_payment_search_sdt" model="ir.ui.view">
+        <field name="name">account.payment.search.sdt</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="account_move"/>
+                <filter name="acount_move" string="Account Move not Set" domain="[('account_move', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

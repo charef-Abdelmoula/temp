@@ -1,0 +1,28 @@
+<odoo>
+
+        <record id="account_analytic_allocation_view" model="ir.ui.view">
+            <field name="name">account.analytic.allocation.form</field>
+            <field name="model">account.analytic.allocation</field>
+            <field name="arch" type="xml">
+                <form string="Setting Allocation">
+                    <p class="oe_grey">
+                        This wizard will allows to update following fields on analytic lines.
+                    </p>
+                    <group>
+                        <field name="no_split"/>
+                        <field name="country_allocation"/>
+                    </group>
+                    <footer>
+                        <button string="Update Entries" name="update_entries" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_analytic_allocation"
+            key2="client_action_multi" name="Setting Allocation"
+            res_model="account.analytic.allocation" src_model="account.analytic.line"
+            view_mode="form" target="new" view_type="form" />
+
+</odoo>

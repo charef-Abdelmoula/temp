@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="invoice_account_invoice_xls_view" model="ir.ui.view">
+        <field name="name">Invoice XLS Export</field>
+        <field name="model">account.invoice.export</field>
+        <field name="arch" type="xml">
+            <form string="Invoice XLS">
+                <p class="oe_grey">
+                    This wizard will help you to export selected invoices in XLS file.
+                </p>
+                <group attrs="{'invisible':[('excel_file','=',False)]}">
+                    <field name="excel_file" filename="filename" readonly="1" invisible="0"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="filename" attrs="{'invisible':[('excel_file','!=',False)]}" required="1" invisible="1"/>
+                        <field name="fname" invisible="1" required="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Print Report" type="object" class="oe_highlight" attrs="{'invisible':[('excel_file','!=',False)]}"/>
+                    <button name="cancel" special="cancel" class="oe_highlight" string="Close" attrs="{'invisible':[('excel_file','=',False)]}"/>
+                      or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_invoice_xls" model="ir.actions.act_window">
+        <field name="name">SDT Invoice XLS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice.export</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="invoice_account_invoice_xls_view"/>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+    <act_window name="SDT Invoice XLS"
+                res_model="account.invoice.export"
+                src_model="account.invoice"
+                view_mode="form"
+                view_type="form"
+                target="new"
+                key2="client_print_multi"
+                id="ir_action_account_invoice_xls"
+                />
+
+</odoo>

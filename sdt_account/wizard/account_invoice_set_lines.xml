@@ -1,0 +1,125 @@
+<odoo>
+
+        <record id="account_invoice_set_lines_view" model="ir.ui.view">
+            <field name="name">account.invoice.set.lines.form</field>
+            <field name="model">account.invoice.set.lines</field>
+            <field name="arch" type="xml">
+                <form string="Setting Analytic Accounts">
+                    <p class="oe_grey">
+                        This wizard will update analytic account on invoice lines based on product.
+                        It will also update following fields on invoice lines if passed from wizard.
+                    </p>
+                    <group>
+                        <field name="department_id"/>
+                        <field name="hr_id"/>
+                    </group>
+                    <footer>
+                        <button string="Update Invoices" name="update_invoices" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_invoice_lines_update"
+            key2="client_action_multi" name="Setting Analytic Accounts"
+            res_model="account.invoice.set.lines" src_model="account.invoice"
+            view_mode="form" target="new" view_type="form" />
+
+        <record id="account_invoice_set_taxes_view" model="ir.ui.view">
+            <field name="name">account.invoice.set.taxes.form</field>
+            <field name="model">account.invoice.set.taxes</field>
+            <field name="arch" type="xml">
+                <form string="Tax Regime">
+                    <p class="oe_grey">
+                        This wizard will update taxes on invoice lines based on fiscal position selected.
+                    </p>
+                    <group>
+                        <field name="fiscal_position_id"/>
+                    </group>
+                    <footer>
+                        <button string="Update Invoices" name="update_invoices" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_invoice_taxes_update"
+            key2="client_action_multi" name="Tax Regime"
+            res_model="account.invoice.set.taxes" src_model="account.invoice"
+            view_mode="form" target="new" view_type="form" />
+
+        <record id="account_invoice_set_product_view" model="ir.ui.view">
+            <field name="name">account.invoice.set.product.form</field>
+            <field name="model">account.invoice.set.product</field>
+            <field name="arch" type="xml">
+                <form string="Tax Regime">
+                    <p class="oe_grey">
+                        This wizard will allows to update Product on line as selected on wizard.
+                    </p>
+                    <group>
+                        <field name="product_id"/>
+                    </group>
+                    <footer>
+                        <button string="Update Invoices" name="update_invoices" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_invoice_set_product"
+            key2="client_action_multi" name="Update Product on Line"
+            res_model="account.invoice.set.product" src_model="account.invoice"
+            view_mode="form" target="new" view_type="form" />
+
+        <record id="account_invoice_line_create_view" model="ir.ui.view">
+            <field name="name">account.invoice.line.create.form</field>
+            <field name="model">account.invoice.line.create</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Line Create">
+                    <p class="oe_grey">
+                        This wizard will create invoice line for selected invoices from papersmart tab information.
+                    </p>
+                    <group>
+                        <field name="product_id"/>
+                    </group>
+                    <footer>
+                        <button string="Update Invoices" name="update_invoices" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_invoice_line_create"
+            key2="client_action_multi" name="Create Invoice Line"
+            res_model="account.invoice.line.create" src_model="account.invoice"
+            view_mode="form" target="new" view_type="form" />
+
+        <record id="account_invoice_set_discount_view" model="ir.ui.view">
+            <field name="name">account.invoice.set.discount.form</field>
+            <field name="model">account.invoice.set.discount</field>
+            <field name="arch" type="xml">
+                <form string="Setting Analytic Accounts">
+                    <p class="oe_grey">
+                        This wizard will update discount on invoice lines.
+                    </p>
+                    <group>
+                        <field name="discount"/>
+                    </group>
+                    <footer>
+                        <button string="Update Invoices" name="update_invoices" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_invoice_lines_discount"
+            key2="client_action_multi" name="Update Discount on Lines"
+            res_model="account.invoice.set.discount" src_model="account.invoice"
+            view_mode="form" target="new" view_type="form" />
+
+</odoo>

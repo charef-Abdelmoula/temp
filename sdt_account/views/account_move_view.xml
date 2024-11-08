@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<odoo>
+
+        <menuitem id="menu_bank_statement_line"
+                  name="Bank Statement Line"
+                  parent="account.menu_finance_entries_accounting_miscellaneous"
+                  action="account.action_bank_statement_line"
+                  sequence="20"/>
+
+        <menuitem id="menu_generate_inv_bills"
+                  name="ACC Update"
+                  parent="account_accountant.menu_accounting"
+                  action="action_generate_inv_bills"
+                  sequence="1"/>
+
+        <record id="view_account_tax_form_sdt" model="ir.ui.view">
+            <field name="name">account.tax.form.sdt</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <field name="include_base_amount" position="after">
+                    <field name="discount_product_id"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- <record id="view_account_invoice_customer_tree_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.customer.tree.sdt</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="number" position="after">
+                    <field name="name"/>
+                </field>
+                <field name="amount_tax_signed" position="after">
+                    <field name="vat_declaration" string="VAT"/>
+                </field>
+                <field name="state" position="after">
+                    <field name="vat_period_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <!-- Update account invoice search view!-->
+        <!-- <record id="account_invoice_groupby_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.search.sdt</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <field name="number" position="replace">
+                    <field name="number" string="Invoice" filter_domain="['|','|','|','|', ('name','ilike',self), ('number','ilike',self), ('origin','ilike',self), ('reference', 'ilike', self), ('partner_id', 'child_of', self)]"/>
+                </field>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="journal_id"/>
+                    <field name="reference"/>
+                    <field name='analytic_product'/>
+                    <field name='import_wizard'/>
+                    <field name='vat_declaration'/>
+                </xpath>
+                <xpath expr="//group/filter[@name='status']" position="after">
+                    <filter string="Journal" name="group_journal" domain="[]" context="{'group_by':'journal_id'}"/>
+                    <filter string="Payment Ref." name="group_reference" domain="[]" context="{'group_by':'reference'}"/>
+                    <filter string="Analytic Product" name="group_analytic_product" domain="[]" context="{'group_by':'analytic_product'}"/>
+                    <filter string="VAT Status" name="group_vat_declaration" domain="[]" context="{'group_by':'vat_declaration'}"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="view_invoice_tree_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.tree.sdt</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="move_type" position="after">
+                    <field name="kanban_state" string="Kanban State" widget="state_selection" optional="hide"/>
+                    <field name='cashdiscount_total' optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_filter_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.search.sdt</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="payment_state"/>
+                    <field name="audit_status"/>
+                    <field name="audit_template_id"/>
+                    <field name="partner_type_id"/>
+                    <field name="journal_id"/>
+                    <field name="market_statement_line_id"/>
+                    <field name="kanban_state"/>
+                </xpath>
+                <xpath expr="//group/filter[@name='salesperson']" position="before">
+                    <filter name="partner" string="Partner" context="{'group_by':'partner_id'}"/>
+                    <filter name="customer_group" string="Customer Group" context="{'group_by':'customer_group'}"/>
+                    <filter name="audit_vat_country" string="VAT Country" context="{'group_by':'audit_vat_country'}"/>
+                    <filter name="product_tax_code" string="Product Tax Code" context="{'group_by':'product_tax_code'}"/>
+                    <filter name="audit_status" string="Audit Status" context="{'group_by':'audit_status'}"/>
+                    <filter name="audit_template_id" string="Audit Template" context="{'group_by':'audit_template_id'}"/>
+                    <filter name="cash_out" string="Cash-Out" domain="[('amount_total_signed', '&lt;', 0)]"/>
+                    <filter name="journal_id" string="Journal" context="{'group_by':'journal_id'}"/>
+                    <filter name="market_statement_id" string="Settlement" context="{'group_by':'market_statement_id'}"/>
+                    <filter name="kanban_state" string="Kanban State" context="{'group_by':'kanban_state'}"/>
+                </xpath>
+                <!-- <xpath expr="//group/filter[@name='late']" position="after">
+                    <filter name="cash_out" string="Cash-Out" domain="[('amount_total_signed', '&lt;', 0)]"/>
+                </xpath> -->
+                <xpath expr="//group/filter[@name='status']" position="after">
+                    <filter name="payment_state" string="Payment Status" context="{'group_by':'payment_state'}"/>
+                    <filter name="payment_id" string="Payment" context="{'group_by':'payment_id'}"/>
+                    <filter name="payment_date" string="Payment Date" context="{'group_by':'payment_date'}"/>
+                    <filter name="partner_type_id" string="Partner Type" context="{'group_by':'partner_type_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_form_sdt" model="ir.ui.view">
+            <field name="name">account.move.customer.sdt</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//header/button[@name='action_invoice_open']" position='after'>
+                    <button name="action_invoice_imported_open" type="object" states="imported" string="Validate" class="oe_highlight o_invoice_validate" groups="account.group_account_invoice"/>
+                </xpath>
+                <xpath expr="//header/button[@name='action_invoice_draft']" position='after'>
+                    <button name="action_invoice_import_to_draft" states="imported" string="Reset to Draft" type="object" groups="account.group_account_invoice"/>
+                    <button name="action_vat_done" type="object" states="open" string="VAT Done" style="background-color:#87CEEB;" class="oe_highlight" groups="account.group_account_invoice"/>
+                    <button name="action_vat_issue" type="object" string="VAT Issue" style="background-color:#EB9100;" class="oe_highlight" groups="account.group_account_invoice"/>
+                </xpath> -->
+                <xpath expr="//field[@name='move_type']" position='before'>
+                    <h1 class="mt0">
+                        <field name="number_ref" attrs="{'invisible': ['|',('state','in',('draft','proforma','proforma2')),('name','=',False)]}"/>
+                    </h1>
+                </xpath>
+                <xpath expr="//field[@name='name']" position='after'>
+                    <field name="kanban_state" widget="state_selection" class="ml-auto"/>
+                </xpath>
+                <xpath expr="//group[@id='header_right_group']" position='inside'>
+                    <field name='invoice_origin' readonly='1'/>
+                </xpath>
+                <xpath expr="//field[@name='qr_code_method']" position="after">
+                    <field name="ppc_paymenttype"/>
+                    <field name="market_statement_line_id"/>
+                    <field name="venice_sinvoicedocnumber"/>
+                </xpath>
+                <xpath expr="//group[@name='accounting_info_group']" position='inside'>
+                    <field name='payment_id' readonly="1"/>
+                    <field name='payment_date' readonly="1"/>
+                    <field name='cashdiscount_status' readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_residual']" position='after'>
+                    <field name='cashdiscount_total' readonly="1" attrs="{'invisible': [('cashdiscount_total', '=', 0)]}"/>
+                </xpath>
+                <!-- <xpath expr="//field[@name='company_id']" position="before">
+                    <field name="original_partner_id"/>
+                </xpath> -->
+                <!-- <xpath
+                    expr="//form/sheet/notebook/page/field/tree/field[@name='account_analytic_id']"
+                    position="replace">
+                </xpath>
+                <xpath
+                    expr="//form/sheet/notebook/page/field/tree/field[@name='analytic_tag_ids']"
+                    position="replace">
+                </xpath>
+                <xpath
+                    expr="//form/sheet/notebook/page/field/tree/field[@name='currency_id']"
+                    position="after">
+                    <field name="account_analytic_id" groups="analytic.group_analytic_accounting"
+                        context="{'default_partner_id': parent.partner_id}"/>
+                    <field name="analytic_client" invisible="1"/>
+                    <field name='department_id'/>
+                    <field name='period_id'/>
+                    <field name='hr_id'/>
+                    <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+                    <attribute name="context">{'type': type, 'journal_id': journal_id, 'default_invoice_id': id, 'partner_id': partner_id,}
+                    </attribute>
+                </xpath> -->
+                <xpath
+                    expr="//form/sheet/notebook/page/field/tree/field[@name='price_subtotal']"
+                    position="after">
+                    <field name='cashdiscount_account_id' optional="show"/>
+                    <field name='cashdiscount_total' optional="show"/>
+                    <field name='cashdiscount_date' optional="show"/>
+                </xpath>
+                <xpath expr="//group[@id='other_tab_group']" position="inside">
+                    <group string="FTP Related Info" name="ftp_info_group">
+                        <field name='import_wizard'/>
+                        <field name='amazon_invoice' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='amazon_raw_data_id' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='amazon_import_config_id' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='record_created_from' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='ftp_raw_data_id' attrs="{'invisible':[('ftp_raw_data_id','=',False)]}"/>
+                        <field name="buyer_tax_registration_jurisdiction" attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='delta_ex_vat'/>
+                        <field name='delta_vat'/>
+                        <field name='delta_total'/>
+                        <field name='cashdiscount_rate'/>
+                        <field name='cashdiscount_expiration'/>
+                    </group>
+                    <group string="Audit Info" name="audit_info_group">
+                        <field name='audit_06_rate' attrs="{'invisible':[('amazon_invoice','=',True)]}"/>
+                        <field name='amazon_audit_06_rate' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='audit_status'/>
+                        <field name='audit_template_id'/>
+                        <field name='audit_variance'/>
+                        <field name='audit_label' readonly='1'/>
+                        <field name='audit_tax_grid' readonly='1'/>
+                        <field name='audit_invoice_line' readonly='1'/>
+                        <field name='audit_vat_country'/>
+                        <field name='product_tax_code'/>
+                        <field name='reason_for_cancellation' attrs="{'invisible': [('reason_for_cancellation','=',False)], 'readonly': True}"/>
+                    </group>
+                    <group string="Pending Fields" name="pending_fields_group">
+                        <field name="customer_group"/>
+                        <field name="original_partner_id"/>
+                        <field name='vat_declaration'/>
+                        <field name='vat_check_date' readonly="1"/>
+                        <field name='vat_issue_date' readonly="1"/>
+                        <field name='vat_period_id' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
+                        <field name='bill_type' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='other_info']" position='before'>
+                    <page name="paper_smart" string="PaperSmart" attrs="{'invisible': [('ppc_invoice','=',False)]}">
+                        <group>
+                            <group string='PaperSmart Import'>
+                                <field name="ppc_invoice" readonly="1"/>
+                                <field name="ppc_user_imported"/>
+                                <field name="ppv_vendor_imported"/>
+                                <field name="ppc_customerorder"/>
+                                <field name="ppc_vendororde"/>
+                                <field name="ppc_title"/>
+                                <field name="ppc_customersurname"/>
+                                <field name="ppc_customerfirstname"/>
+                                <field name="ppc_email"/>
+                                <field name="ppc_customernumber"/>
+                                <field name="ppc_company"/>
+                                <!-- <field name="ppc_paymenttype"/> -->
+                                <field name="ppc_orderingstate"/>
+                                <field name="ppc_couponcode"/>
+                                <field name="ppc_couponvalue"/>
+                            </group>
+                            <group string='Customer Invoice'>
+                                <field name="ppc_orderingdate"/>
+                                <field name="ppc_invoicenumber"/>
+                                <field name="ppc_invoicedate"/>
+                                <field name="ppc_netvalueofarticles"/>
+                                <field name="ppc_netshipment"/>
+                                <field name="ppc_rebate"/>
+                                <field name="ppc_nettotal"/>
+                                <field name="ppc_vat"/>
+                                <field name="ppc_grosstotal"/>
+                                <field name="ppc_agiopaymentprovider"/>
+                                <field name="ppc_paidon"/>
+                                <field name="ppc_expectedgross"/>
+                                <field name="ppc_paymentprovider"/>
+                                <field name="ps_paymentprovidertxid"/>
+                            </group>
+                        </group>
+                        <group string='Vendor Invoice'>
+                            <group >
+                                <field name="ppv_invoiceid"/>
+                                <field name="ppv_created"/>
+                                <field name="ppv_updated"/>
+                                <field name="ppv_netcommission"/>
+                                <field name="ppv_netdiscount"/>
+                                <field name="ppv_netpaymentfee"/>
+                            </group>
+                            <group>
+                                <field name="ppv_grossvendorpayout"/>
+                                <field name="ppv_vendorid"/>
+                                <field name="ppv_invoicedate"/>
+                                <field name="ppv_nettotal"/>
+                                <field name="ppv_vat"/>
+                                <field name="ppv_grosstotal"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="dropshipping" string="DistriSmart" attrs="{'invisible': [('ds_invoice','=',False)]}">
+                        <group>
+                            <group name='venice' string='Venice'>
+                                <field name="ds_invoice" invisible="1"/>
+                                <field name="venice_repcountry"/>
+                                <field name="venice_accyear"/>
+                                <field name="venice_docnum"/>
+                                <field name="dropshipping"/>
+                            </group>
+                            <group name='client_info' string='Client Information'>
+                                <field name="venice_customername"/>
+                                <field name="venice_customernumber"/>
+                                <field name="venice_customersubnumber"/>
+                                <field name="venice_sinvremark"/>
+                                <field name="venice_deliveryname"/>
+                                <field name="venice_deliverynumber"/>
+                                <field name="venice_deliverysubnumber"/>
+                            </group>
+                            <group name='purchase_order' string='Purchase Order'>
+                                <field name="venice_porderdocnumber"/>
+                                <field name="venice_porderdate"/>
+                                <field name="venice_porderaccyear"/>
+                                <field name="venice_porderamountvatex"/>
+                                <field name="po_name"/>
+                            </group>
+                            <group name='sale_order' string='Sales Order'>
+                                <field name="venice_sorderdocnumber"/>
+                                <field name="venice_sorderdate"/>
+                                <field name="venice_sorderaccyear"/>
+                                <field name="venice_sorddocamountvatex"/>
+                                <field name="so_name"/>
+                            </group>
+                            <group name='client_invoice' string='Client Invoice'>
+                                <field name="venice_sinvoicebook"/>
+                                <field name="venice_sinvoicedocnumber"/>
+                                <field name="venice_sinvoicedate"/>
+                                <field name="venice_sinvoiceaccyear"/>
+                                <field name="venice_sinvoiceamountvatex"/>
+                                <field name="inv_name"/>
+                                <field name="venice_sinvoiceamount"/>
+                                <field name="venice_sinvexpirationdate"/>
+                                <field name="sinvdiscount"/>
+                                <field name="clientfiscalposition"/>
+                            </group>
+                            <group name='vendor_bill' string='Vendor Bill'>
+                                <field name="venice_pinvoicebook"/>
+                                <field name="venice_suppname"/>
+                                <field name="venice_suppnum"/>
+                                <field name="venice_pinvoicedocnum"/>
+                                <field name="venice_pinvoicedate"/>
+                                <field name="venice_pinvoiceaccyear"/>
+                                <field name="venice_pinvoiceamount"/>
+                                <field name="venice_pinvexpirationDate"/>
+                                <field name="venice_pinvremark"/>
+                                <field name="pinvdiscount"/>
+                                <field name="venice_pinvvatsystemdsc"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <record id="view_account_invoice_form_sdt_1" model="ir.ui.view">
+            <field name="name">account.invoice.customer.sdt.1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="sdt_account.view_account_invoice_form_sdt" />
+            <field name="groups_id" eval="[(6, 0, [ref('sdt_account.group_sdt_super_admin')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat_period_id']" position="replace">
+                    <field name='vat_period_id' />
+                </xpath>
+                <xpath expr="//field[@name='bill_type']" position="replace">
+                    <field name='bill_type'/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <menuitem 
+                name="SDT Configuration"
+                id="menu_papersmart"
+                parent="account.menu_finance_configuration"
+                sequence="105"/>
+
+        <!-- <record id="view_account_invoice_supplier_tree_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.tree.sdt</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+            <field name="arch" type="xml">
+                <field name="amount_untaxed_invoice_signed" position="replace"/>
+                <field name="amount_tax_signed" position="replace"/>
+                <field name="date_invoice" position="after">
+                    <field name="amount_untaxed_invoice_signed" string="Tax Excluded" sum="Total"/>
+                    <field name="amount_tax_signed" string="Tax" sum="Total"/>
+                </field>
+                <field name="reference" position="after">
+                    <field name="name"/>
+                </field>
+                <field name="amount_total_signed" position="before">
+                    <field name="vat_declaration" string="VAT"/>
+                </field>
+                <field name="state" position="after">
+                    <field name="vat_period_id"/>
+                    <field name='ftp_raw_data_id'/>
+                </field>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_account_move_supplier_form_sdt" model="ir.ui.view">
+            <field name="name">account.move.supplier.sdt</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//header/button[@name='action_invoice_draft']" position='after'>
+                        <button name="action_invoice_import_to_draft" states="imported" string="Reset to Draft" type="object" groups="account.group_account_invoice"/>
+                        <button name="action_vat_done" type="object" states="open" string="VAT Done" style="background-color:#87CEEB;" class="oe_highlight" groups="account.group_account_invoice"/>
+                        <button name="action_vat_issue" type="object" string="VAT Issue" style="background-color:#EB9100;" class="oe_highlight" groups="account.group_account_invoice"/>
+                        <button name="%(action_invoice_cash_discount)d" states="open" string="Cash Discount" type="action" style="background-color:#CCCC00;" class="oe_highlight" groups="account.group_account_invoice"/>
+                    </xpath>
+                    <xpath expr="//field[@name='type']" position='before'>
+                        <h1 class="mt0">
+                            <field name="number_ref" attrs="{'invisible': ['|',('state','in',('draft','proforma','proforma2')),('name','=',False)]}"/>
+                        </h1>
+                    </xpath>
+                    <xpath expr="//field[@name='partner_bank_id']" position='after'>
+                        <field name='vat_declaration'/>
+                        <field name='vat_check_date' readonly="1"/>
+                        <field name='vat_issue_date' readonly="1"/>
+                        <field name='vat_period_id' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
+                        <field name='bill_type' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='incoterm_id']" position='before'>
+                        <field name='analytic_product'/>
+                        <field name='import_wizard'/>
+                        <field name='ftp_raw_data_id'/>
+                        <field name='reason_for_cancellation' attrs="{'invisible': [('reason_for_cancellation','=', False)], 'readonly': True}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+                        <attribute name="context">{'type': type, 'journal_id': journal_id, 'partner_id': partner_id,}
+                        </attribute>
+                    </xpath>
+                    <xpath
+                        expr="//form/sheet/notebook/page/field/tree/field[@name='account_analytic_id']"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="//form/sheet/notebook/page/field/tree/field[@name='analytic_tag_ids']"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="//form/sheet/notebook/page/field/tree/field[@name='currency_id']"
+                        position="after">
+                        <field name="account_analytic_id" groups="analytic.group_analytic_accounting"
+                            context="{'default_partner_id': parent.partner_id}"/>
+                        <field name="analytic_client" invisible="1"/>
+                        <field name='department_id'/>
+                        <field name='period_id'/>
+                        <field name='hr_id'/>
+                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    </xpath>
+                    <xpath
+                        expr="//form/sheet/notebook/page/group/group/div/field/tree/field[@name='account_analytic_id']"
+                        position="replace">
+                        <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                    </xpath>
+                    <xpath expr="//field[@name='name']" position='after'>
+                        <field name='reason_for_cancellation' attrs="{'invisible': [('reason_for_cancellation','=', False)]}"/>
+                    </xpath>
+                    <xpath expr="//page[@name='other_info']" position='before'>
+                        <page name="paper_smart" string="PaperSmart" attrs="{'invisible': [('ppc_invoice','=',False)]}">
+                            <group>
+                                <group string='PaperSmart Import'>
+                                    <field name="ppc_invoice" readonly="1"/>
+                                    <field name="ppc_user_imported"/>
+                                    <field name="ppv_vendor_imported"/>
+                                    <field name="ppc_customerorder"/>
+                                    <field name="ppc_vendororde"/>
+                                    <field name="ppc_title"/>
+                                    <field name="ppc_customersurname"/>
+                                    <field name="ppc_customerfirstname"/>
+                                    <field name="ppc_email"/>
+                                    <field name="ppc_customernumber"/>
+                                    <field name="ppc_company"/>
+                                    <field name="ppc_paymenttype"/>
+                                    <field name="ppc_orderingstate"/>
+                                    <field name="ppc_couponcode"/>
+                                    <field name="ppc_couponvalue"/>
+                                </group>
+                                <group string='Customer Invoice'>
+                                    <field name="ppc_orderingdate"/>
+                                    <field name="ppc_invoicenumber"/>
+                                    <field name="ppc_invoicedate"/>
+                                    <field name="ppc_netvalueofarticles"/>
+                                    <field name="ppc_netshipment"/>
+                                    <field name="ppc_rebate"/>
+                                    <field name="ppc_nettotal"/>
+                                    <field name="ppc_vat"/>
+                                    <field name="ppc_grosstotal"/>
+                                    <field name="ppc_agiopaymentprovider"/>
+                                    <field name="ppc_paidon"/>
+                                    <field name="ppc_expectedgross"/>
+                                    <field name="ppc_paymentprovider"/>
+                                    <field name="ps_paymentprovidertxid"/>
+                                </group>
+                            </group>
+                            <group string='Vendor Invoice'>
+                                <group >
+                                    <field name="ppv_invoiceid"/>
+                                    <field name="ppv_created"/>
+                                    <field name="ppv_updated"/>
+                                    <field name="ppv_netcommission"/>
+                                    <field name="ppv_netdiscount"/>
+                                    <field name="ppv_netpaymentfee"/>
+                                </group>
+                                <group>
+                                    <field name="ppv_grossvendorpayout"/>
+                                    <field name="ppv_vendorid"/>
+                                    <field name="ppv_invoicedate"/>
+                                    <field name="ppv_nettotal"/>
+                                    <field name="ppv_vat"/>
+                                    <field name="ppv_grosstotal"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="dropshipping" string="DistriSmart" attrs="{'invisible': [('ds_invoice','=',False)]}">
+                            <group>
+                                <group name='venice' string='Venice'>
+                                    <field name="ds_invoice" invisible="1"/>
+                                    <field name="venice_repcountry"/>
+                                    <field name="venice_accyear"/>
+                                    <field name="venice_docnum"/>
+                                    <field name="dropshipping"/>
+                                </group>
+                                <group name='client_info' string='Client Information'>
+                                    <field name="venice_customername"/>
+                                    <field name="venice_customernumber"/>
+                                    <field name="venice_customersubnumber"/>
+                                    <field name="venice_sinvremark"/>
+                                    <field name="venice_deliveryname"/>
+                                    <field name="venice_deliverynumber"/>
+                                    <field name="venice_deliverysubnumber"/>
+                                </group>
+                                <group name='purchase_order' string='Purchase Order'>
+                                    <field name="venice_porderdocnumber"/>
+                                    <field name="venice_porderdate"/>
+                                    <field name="venice_porderaccyear"/>
+                                    <field name="venice_porderamountvatex"/>
+                                    <field name="po_name"/>
+                                </group>
+                                <group name='sale_order' string='Sales Order'>
+                                    <field name="venice_sorderdocnumber"/>
+                                    <field name="venice_sorderdate"/>
+                                    <field name="venice_sorderaccyear"/>
+                                    <field name="venice_sorddocamountvatex"/>
+                                    <field name="so_name"/>
+                                </group>
+                                <group name='client_invoice' string='Client Invoice'>
+                                    <field name="venice_sinvoicebook"/>
+                                    <field name="venice_sinvoicedocnumber"/>
+                                    <field name="venice_sinvoicedate"/>
+                                    <field name="venice_sinvoiceaccyear"/>
+                                    <field name="venice_sinvoiceamountvatex"/>
+                                    <field name="inv_name"/>
+                                    <field name="venice_sinvoiceamount"/>
+                                    <field name="venice_sinvexpirationdate"/>
+                                    <field name="sinvdiscount"/>
+                                    <field name="clientfiscalposition"/>
+                                </group>
+                                <group name='vendor_bill' string='Vendor Bill'>
+                                    <field name="venice_pinvoicebook"/>
+                                    <field name="venice_suppname"/>
+                                    <field name="venice_suppnum"/>
+                                    <field name="venice_pinvoicedocnum"/>
+                                    <field name="venice_pinvoicedate"/>
+                                    <field name="venice_pinvoiceaccyear"/>
+                                    <field name="venice_pinvoiceamount"/>
+                                    <field name="venice_pinvexpirationDate"/>
+                                    <field name="venice_pinvremark"/>
+                                    <field name="pinvdiscount"/>
+                                    <field name="venice_pinvvatsystemdsc"/>
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_account_invoice_supplier_form_sdt_1" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.sdt.1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="sdt_account.view_account_invoice_supplier_form_sdt" />
+            <field name="groups_id" eval="[(6, 0, [ref('sdt_account.group_sdt_super_admin')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat_period_id']" position="replace">
+                    <field name='vat_period_id' />
+                </xpath>
+                <xpath expr="//field[@name='bill_type']" position="replace">
+                    <field name='bill_type'/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_invoice_form_cancel_inherit_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.customer.cancel.sdt</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account_cancel.invoice_form_cancel_inherit"/>
+            <field name="arch" type="xml">
+                <button name="action_invoice_cancel" position="replace">
+                    <button name="action_invoice_cancel" type="object" states="draft,open,paid" string="Cancel" groups="sdt_account.group_sdt_super_admin"/>
+                </button>
+            </field>
+        </record> -->
+
+        <!-- <record id="view_invoice_form_supplier_cancel_inherit_sdt" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.cancel.sdt</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account_cancel.invoice_supplier_cancel_form_inherit"/>
+            <field name="arch" type="xml">
+                <button name="action_invoice_cancel" position="replace">
+                    <button name="action_invoice_cancel" type="object" states="draft,open,paid" string="Cancel" groups="sdt_account.group_sdt_super_admin"/>
+                </button>
+            </field>
+        </record> -->
+
+        <record id="action_audit_lable_invoice" model="ir.actions.server">
+            <field name="name">Audit Label</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.action_audit_label()
+            </field>
+        </record>
+
+        <!-- <record id="update_set_payment_type" model="ir.actions.server">
+            <field name="name">Set Payment Type</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="state">code</field>
+            <field name="code">records.action_set_payment_type()</field>
+        </record> -->
+
+        <record id="link_product_tax_code" model="ir.actions.server">
+          <field name="name">Link Product Tax Code</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_link_product_tax_code()</field>
+        </record>
+
+        <record id="update_delta_fields_invoice" model="ir.actions.server">
+          <field name="name">Update Delta Fields</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_compute_delta_fields()</field>
+        </record>
+
+        <record id="update_audit_tax_grid_invoice" model="ir.actions.server">
+          <field name="name">Update Audit Tax Grid</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <!-- <field name="binding_model_id" ref="account.model_account_move" /> -->
+          <field name="state">code</field>
+          <field name="code">records.server_action_update_audit_tax_grid()</field>
+        </record>
+
+        <record id="update_audit_invoice_line" model="ir.actions.server">
+          <field name="name">Update Audit Invoice Line</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <!-- <field name="binding_model_id" ref="account.model_account_move" /> -->
+          <field name="state">code</field>
+          <field name="code">records.server_action_update_audit_invoice_line()</field>
+        </record>
+
+        <record id="update_audit_status" model="ir.actions.server">
+          <field name="name">Update Audit Status</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_update_audit_status()</field>
+        </record>
+
+        <record id="reset_to_draft" model="ir.actions.server">
+          <field name="name">Reset To Draft</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.button_draft()</field>
+        </record>
+
+        <record id="update_source_document_invoice" model="ir.actions.server">
+          <field name="name">Update Source Document</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_update_source_document()</field>
+        </record>
+
+        <record id="update_market_partner_move" model="ir.actions.server">
+          <field name="name">Update Market Partner</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_update_market_partner()</field>
+        </record>
+
+        <record id="update_cash_discount_invoice" model="ir.actions.server">
+          <field name="name">Cash Discount</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.action_cash_discount()</field>
+        </record>
+        <!-- <record id="update_year_on_invoice" model="ir.actions.server">
+          <field name="name">Update Year</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_INV_update()</field>
+        </record>
+
+        <record id="update_names_on_invoice" model="ir.actions.server">
+          <field name="name">Update Names</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_name_update()</field>
+        </record> -->
+
+        <record id="update_taxes_on_invoice_line" model="ir.actions.server">
+          <field name="name">Update Accounting fields</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_taxes_update()</field>
+        </record>
+
+        <record id="create_audit_template" model="ir.actions.server">
+          <field name="name">Create Audit Template</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="binding_model_id" ref="account.model_account_move" />
+          <field name="binding_view_types">form</field>
+          <field name="state">code</field>
+          <field name="code">records.action_create_audit_template()</field>
+        </record>
+
+        <record id="view_bank_statement_line_form_sdt" model="ir.ui.view">
+            <field name="name">account.bank.statement.line.form.sdt</field>
+            <field name="model">account.bank.statement.line</field>
+            <field name="inherit_id" ref="account.view_bank_statement_line_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="kanban_state" string="Kanban State" widget="state_selection"/>
+                </field>
+                <xpath expr="//group" position="after">
+                    <separator string="Internal Notes"/>
+                    <field name="internal_notes" class="text-monospace"/>
+                </xpath>
+                <xpath expr="//group[last()]" position="after">
+                    <group col="4" name='market_place' string='Market Place'>
+                        <field name="market_place"/>
+                        <field name="fulfillment"/>
+                        <field name="price_principal"/>
+                        <field name="com_principal"/>
+                        <field name="price_tax"/>
+                        <field name="com_variable"/>
+                        <field name="price_returnshipping"/>
+                        <field name="com_refund"/>
+                        <field name="price_shipping"/>
+                        <field name="com_shipping"/>
+                        <field name="price_shippingtax"/>
+                        <field name="com_total"/>
+                        <field name="posted_date_char"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_bank_statement_line_tree_sdt" model="ir.ui.view">
+            <field name="name">account.bank.statement.line.tree.sdt</field>
+            <field name="model">account.bank.statement.line</field>
+            <field name="inherit_id" ref="account.view_bank_statement_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="narration" position="after">
+                    <field name="kanban_state" string="Kanban State" widget="state_selection" optional="hide"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_bank_statement_line_filter_sdt" model="ir.ui.view">
+            <field name="name">account.bank.statement.line.search.sdt</field>
+            <field name="model">account.bank.statement.line</field>
+            <field name="inherit_id" ref="account.view_bank_statement_line_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='transaction_type']" position="after">
+                    <field name="kanban_state"/>
+                    <field name="partner_type_id"/>
+                    <filter name="cash_in" string="Cash-In" domain="[('amount', '&gt;=', 0)]"/>
+                    <filter name="cash_out" string="Cash-Out" domain="[('amount', '&lt;', 0)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Partner" name="partner_id" domain="[]" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Journal" name="journal_id" domain="[]" context="{'group_by': 'journal_id'}"/>
+                        <filter string="Is Reconciled" name="is_reconciled" domain="[]" context="{'group_by': 'is_reconciled'}"/>
+                        <filter string="Partner Type" name="partner_type" domain="[]" context="{'group_by': 'partner_type_id'}"/>
+                        <filter string="Kanban State" name="kanban_state" domain="[]" context="{'group_by': 'kanban_state'}"/>
+                        <filter string="Transaction Type" name="transaction_type" domain="[]" context="{'group_by': 'transaction_type'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_audit_lable_bank_statement_line" model="ir.actions.server">
+            <field name="name">Transaction Type</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="model_id" ref="account.model_account_bank_statement_line"/>
+            <field name="binding_model_id" ref="account.model_account_bank_statement_line"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.action_audit_label()
+            </field>
+        </record>
+
+        <record id="view_ppc_paymenttype_form" model="ir.ui.view">
+            <field name="name">ppc.paymenttype.form</field>
+            <field name="model">ppc.paymenttype</field>
+            <field name="arch" type="xml">
+            <form string="PPC Payment Type">
+                <sheet>
+                    <group>
+                        <field name="ppc_paymenttype" />
+                        <field name="payment_term" />
+                        <field name="ppv_vendorpayment" />
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_ppc_paymenttype_tree" model="ir.ui.view">
+            <field name="name">ppc.paymenttype.tree</field>
+            <field name="model">ppc.paymenttype</field>
+            <field name="arch" type="xml">
+                <tree string="PPC Payment Type">
+                    <field name="ppc_paymenttype" />
+                    <field name="payment_term" />
+                    <field name="ppv_vendorpayment" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ppc_paymenttype" model="ir.actions.act_window">
+            <field name="name">PPC PaymentType</field>
+            <field name="res_model">ppc.paymenttype</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_ppc_paymenttype_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="PPC PaymentType"
+            id="menu_ppc_paymenttype"
+            parent="menu_papersmart"
+            action="action_ppc_paymenttype"
+            sequence="5"/>
+
+        <record id="view_ppc_invoiceline_form" model="ir.ui.view">
+            <field name="name">ppc.invoiceline.form</field>
+            <field name="model">ppc.invoiceline</field>
+            <field name="arch" type="xml">
+            <form string="PPC Payment Type">
+                <sheet>
+                    <group>
+                        <field name="ppc_netvalueofarticles" />
+                        <field name="ppc_netshipment" />
+                        <field name="ppc_rebate" />
+                        <field name="ppv_netcommission" />
+                        <field name="ppv_netdiscount" />
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_ppc_invoiceline_tree" model="ir.ui.view">
+            <field name="name">ppc.invoiceline.tree</field>
+            <field name="model">ppc.invoiceline</field>
+            <field name="arch" type="xml">
+                <tree string="PPC Payment Type">
+                    <field name="ppc_netvalueofarticles" />
+                    <field name="ppc_netshipment" />
+                    <field name="ppc_rebate" />
+                    <field name="ppv_netcommission" />
+                    <field name="ppv_netdiscount" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ppc_invoiceline" model="ir.actions.act_window">
+            <field name="name">PPC Invoice Line</field>
+            <field name="res_model">ppc.invoiceline</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_ppc_invoiceline_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="PPC Invoice Line"
+            id="menu_ppc_invocie_line"
+            parent="menu_papersmart"
+            action="action_ppc_invoiceline"
+            sequence="10"/>
+
+        <record id="view_vat_period_form" model="ir.ui.view">
+            <field name="name">vat.period.form</field>
+            <field name="model">vat.period</field>
+            <field name="arch" type="xml">
+            <form string="VAT Period">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="active" />
+                            <field name="statement_issued" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_vat_period_tree" model="ir.ui.view">
+            <field name="name">vat.period.tree</field>
+            <field name="model">vat.period</field>
+            <field name="arch" type="xml">
+                <tree string="VAT Period">
+                    <field name="name" />
+                    <field name="statement_issued" />
+                    <field name="company_id" />
+                    <field name="active" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_vat_period" model="ir.actions.act_window">
+            <field name="name">VAT Period</field>
+            <field name="res_model">vat.period</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_vat_period_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="VAT Period"
+            id="menu_vat_period"
+            parent="menu_papersmart"
+            action="action_vat_period"
+            sequence="30"/>
+
+        <!-- DS Script -->
+        <record id="view_ds_script_form" model="ir.ui.view">
+            <field name="name">ds.script.form</field>
+            <field name="model">ds.script</field>
+            <field name="arch" type="xml">
+            <form string="DS Script">
+                <sheet>
+                    <group>
+                        <group string='Dropshipping Imports'>
+                            <field name="analytic_dsimport_department" />
+                            <field name="analytic_dsimport_de" />
+                            <field name="analytic_dsimport_be" />
+                            <field name="analytic_dsimport_nl" />
+                            <field name="analytic_dsimport_fr" />
+                        </group>
+                        <group string='Various Imports'>
+                            <field name="analytic_vsimport_department" />
+                            <field name="analytic_vsimport_de" />
+                            <field name="analytic_vsimport_be" />
+                            <field name="analytic_vsimport_nl" />
+                            <field name="analytic_vsimport_fr" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string='HR Column'>
+                            <field name="analytic_hrimport_de" />
+                            <field name="analytic_hrimport_be" />
+                            <field name="analytic_hrimport_nl" />
+                            <field name="analytic_hrimport_fr" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_ds_script_tree" model="ir.ui.view">
+            <field name="name">ds.script.tree</field>
+            <field name="model">ds.script</field>
+            <field name="arch" type="xml">
+                <tree string="DS Script">
+                    <field name="analytic_dsimport_department" />
+                    <field name="analytic_vsimport_department" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ds_script" model="ir.actions.act_window">
+            <field name="name">DS Script</field>
+            <field name="res_model">ds.script</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_ds_script_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="DS Script"
+            id="menu_ds_script"
+            parent="menu_papersmart"
+            action="action_ds_script"
+            sequence="40"/>
+
+
+        <record id="view_bank_statement_form_sdt" model="ir.ui.view">
+            <field name="name">view.bank.statement.form.sdt</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='statement_line_ids']" position="after">
+                    <page string="Market Place" name="market_place">
+                        <group col="4" name='market_place'>
+                            <field name="market_partner_id"/>
+                            <field name="market_reserve_start"/>
+                            <field name="market_start_date"/>
+                            <field name="market_reserve_end"/>
+                            <field name="market_end_date"/>
+                            <field name="market_amount"/>
+                            <field name="market_deposit_date"/>
+                        </group>
+                        <!-- <group col="4" name='market_place'> -->
+                            <field name="market_transaction_line_ids">
+                                <tree editable="top">
+                                    <field name="statement_id" invisible="1"/>
+                                    <field name="transaction_type_id"/>
+                                    <field name="date"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        <!-- </group> -->
+                    </page>
+                </xpath>
+                <xpath
+                    expr="//form/sheet/notebook/page/field/tree/field[@name='partner_id']"
+                    position="before">
+                    <field name="partner_name" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="update_partner_on_bsl" model="ir.actions.server">
+          <field name="name">Update Partner on BSL</field>
+          <field name="model_id" ref="account.model_account_bank_statement"/>
+          <field name="binding_model_id" ref="account.model_account_bank_statement" />
+          <field name="state">code</field>
+          <field name="code">records.server_action_update_partner_on_bsl()</field>
+        </record>
+
+        <!-- Invoice Line Department -->
+        <record id="view_invoice_department_form" model="ir.ui.view">
+            <field name="name">invoice.department.form</field>
+            <field name="model">invoice.department</field>
+            <field name="arch" type="xml">
+            <form string="Department">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_invoice_department_tree" model="ir.ui.view">
+            <field name="name">invoice.department.tree</field>
+            <field name="model">invoice.department</field>
+            <field name="arch" type="xml">
+                <tree string="Department">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_invoice_department" model="ir.actions.act_window">
+            <field name="name">Department</field>
+            <field name="res_model">invoice.department</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_invoice_department_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Department"
+            id="menu_invoice_department"
+            parent="menu_papersmart"
+            action="action_invoice_department"
+            sequence="80"/>
+
+        <!-- Periode on invoice line -->
+        <record id="view_invoice_periode_form" model="ir.ui.view">
+            <field name="name">invoice.periode.form</field>
+            <field name="model">invoice.periode</field>
+            <field name="arch" type="xml">
+            <form string="Periode">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_invoice_periode_tree" model="ir.ui.view">
+            <field name="name">invoice.periode.tree</field>
+            <field name="model">invoice.periode</field>
+            <field name="arch" type="xml">
+                <tree string="Periode">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_invoice_periode" model="ir.actions.act_window">
+            <field name="name">Periode</field>
+            <field name="res_model">invoice.periode</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_invoice_periode_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Periode"
+            id="menu_invoice_periode"
+            parent="menu_papersmart"
+            action="action_invoice_periode"
+            sequence="90"/>
+
+        <!-- HR on invoice line -->
+        <record id="view_invoice_hr_form" model="ir.ui.view">
+            <field name="name">invoice.hr.form</field>
+            <field name="model">invoice.hr</field>
+            <field name="arch" type="xml">
+            <form string="Periode">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_invoice_hr_tree" model="ir.ui.view">
+            <field name="name">invoice.hr.tree</field>
+            <field name="model">invoice.hr</field>
+            <field name="arch" type="xml">
+                <tree string="Periode">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_invoice_hr" model="ir.actions.act_window">
+            <field name="name">HR</field>
+            <field name="res_model">invoice.hr</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_invoice_hr_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="HR"
+            id="menu_invoice_hr"
+            parent="menu_papersmart"
+            action="action_invoice_hr"
+            sequence="100"/>
+
+</odoo>

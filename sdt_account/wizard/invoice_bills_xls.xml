@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- payment bills export -->
+
+    <record id="invoice_bills_export_report_view" model="ir.ui.view">
+        <field name="name">Invoice Bills Export</field>
+        <field name="model">invoice.bills.export</field>
+        <field name="arch" type="xml">
+            <form string="Bills Report">
+                <p class="oe_grey">
+                    This wizard will help you to generate report of selected payment and it's related invoices.
+                </p>
+                <group attrs="{'invisible':[('excel_file','=',False)]}">
+                    <field name="excel_file" filename="filename" readonly="1" invisible="0"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="filename" attrs="{'invisible':[('excel_file','!=',False)]}" required="1" invisible="1"/>
+                        <field name="fname" invisible="1" required="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Print Report" type="object" class="oe_highlight" attrs="{'invisible':[('excel_file','!=',False)]}"/>
+                    <button name="cancel" special="cancel" class="oe_highlight" string="Close" attrs="{'invisible':[('excel_file','=',False)]}"/>
+                      or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_invoice_bills_report_view" model="ir.actions.act_window">
+        <field name="name">SDT Bills</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.bills.export</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="invoice_bills_export_report_view"/>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+    <act_window name="SDT Bills"
+                res_model="invoice.bills.export"
+                src_model="account.payment"
+                view_mode="form"
+                view_type="form"
+                target="new"
+                key2="client_print_multi"
+                id="ir_action_invoice_bills_report"
+                />
+
+</odoo>

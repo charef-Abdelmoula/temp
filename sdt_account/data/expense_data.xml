@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for sku -->
+        <record id="seq_hr_expense" model="ir.sequence">
+            <field name="name">Expense Sequence</field>
+            <field name="code">hr.expense.sequence</field>
+            <field name="prefix">EXP%(y)s/</field>
+            <field name="suffix">/%(month)s%(day)s</field>
+            <field name="padding">5</field>
+            <field eval="10000" name="number_next"/>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>
+

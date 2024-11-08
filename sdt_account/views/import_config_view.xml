@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_import_config_form" model="ir.ui.view">
+        <field name="name">import.config.form</field>
+        <field name="model">import.config</field>
+        <field name="arch" type="xml">
+            <form string="Import Configuration">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Name ..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="country"/>
+                            <field name="type"/>
+                            <field name="book"/>
+                            <field name="document_type"/>
+                            <field name="journal_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="product_id_1"/>
+                            <field name="product_id_2"/>
+                            <field name="product_id_3"/>
+                            <field name="product_id_4"/>
+                            <field name="product_id_0"/>
+                        </group>
+                    </group>
+                    <group>
+                         <div class="oe_grey" colspan="4">
+                            <b></b>These are the different cases for configuration table.<p/>
+                            The main import type are: <p/>
+                                - For Purchase: "Import Bills and Refund INVO6"<p/>
+                                - For Sales: "Import Invoices and Credut Notes INVO6"<p/>
+                            <table class="table table-sm">
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (MA)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV01(DS) / DE</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (MACN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV01(DS) / DE</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (SLS)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV11(DS) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (SCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV11(DS) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (AMZ)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV21(DS-Amazon) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (AMZCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV21(DS-Amazon) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (SCMP)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV31(DS-ConradMP) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (SCNCMP)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV31(DS-ConradMP) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (KFL)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer not yet! for future platforms (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-SLS (KFLCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer not yet! for future platforms (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-PUR (PUR)-invoice</span></td>
+                                    <td class="text-left"><span>--> Vendor BILL11 (DS) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                    <td class="text-left"><span>* DE-PUR (PCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Vendor BILL11 (DS) / DE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                    <td class="text-left"><span>* BE-SLS (SLS)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV12 (DS) / BE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                    <td class="text-left"><span>* BE-SLS (SCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV12 (DS) / BE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                    <td class="text-left"><span>* BE-SLS (MA)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV02 (DS) / BE</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                    <td class="text-left"><span>* BE-SLS (MACN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV02 (DS) / BE</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                    <td class="text-left"><span>* BE-PUR (PUR)-invoice</span></td>
+                                    <td class="text-left"><span>--> Vendor BILL12 (DS) / BE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                    <td class="text-left"><span>* BE-PUR (PCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Vendor BILL12 (DS) / BE (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                    <td class="text-left"><span>* NL-SLS (SLS)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV13 (DS) / NL (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                    <td class="text-left"><span>* NL-SLS (SCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV13 (DS) / NL (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                    <td class="text-left"><span>* NL-SLS (MA)-invoice</span></td>
+                                    <td class="text-left"><span>--> Customer INV03 (DS) / NL</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                    <td class="text-left"><span>* NL-SLS (MACN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Customer INV03 (DS) / NL</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                    <td class="text-left"><span>* NL-PUR (PUR)-invoice</span></td>
+                                    <td class="text-left"><span>--> Vendor BILL13 (DS) / NL (06)</span></td>
+                                </tr>
+                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                    <td class="text-left"><span>* NL-PUR (PCN)-creditnote</span></td>
+                                    <td class="text-left"><span>--> Vendor BILL13 (DS) / NL (06)</span></td>
+                                </tr>
+                            </table>
+                         </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_import_config_tree" model="ir.ui.view">
+        <field name="name">import.config.tree</field>
+        <field name="model">import.config</field>
+        <field name="arch" type="xml">
+            <tree string="Import Configuration">
+                <field name="country"/>
+                <field name="type"/>
+                <field name="book"/>
+                <field name="document_type"/>
+                <field name="company_id"/>
+                <field name="journal_id"/>
+                <field name="product_id_1"/>
+                <field name="product_id_2"/>
+                <field name="product_id_3"/>
+                <field name="product_id_4"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_import_config" model="ir.actions.act_window">
+        <field name="name">Import Configuration</field>
+        <field name="res_model">import.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_import_config_tree"/>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- IMPORT CONFIG AMAZON -->
+    <record id="view_import_config_amazon_form" model="ir.ui.view">
+        <field name="name">import.config.amazon.form</field>
+        <field name="model">import.config.amazon</field>
+        <field name="arch" type="xml">
+            <form string="Import Configuration Amazon">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Name ..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="country"/>
+                            <field name="type"/>
+                            <!-- <field name="book"/> -->
+                            <field name="document_type"/>
+                            <field name="transaction_type"/>
+                            <field name="journal_id"/>
+                            <field name="active"/>
+                        </group>
+                        <!-- <group> -->
+                            <!-- <field name="product_id_1"/>
+                            <field name="product_id_2"/>
+                            <field name="product_id_3"/>
+                            <field name="product_id_4"/>
+                            <field name="product_id_0"/>
+                        </group>
+                        <group string='Amazon Market'> -->
+                            <!-- <field name="tax_rate"/>
+                            <field name="product_tax_code"/>
+                            <field name="jurisdiction_name"/>
+                            <field name="seller_tax_registration_jurisdiction"/>
+                            <field name="general_product_id"/>
+                        </group> -->
+                        <group>
+                            <field name="seller_tax_registration_jurisdiction"/>
+                            <field name="buyer_tax_registration_jurisdiction"/>
+                            <field name="fiscal_position"/>
+                            <field name="customer_partner"/>
+                            <field name="payment_term_id"/>
+                            <field name="tax_type"/>
+                            <field name="tax_rate"/>
+                            <field name="general_product_id"/>
+                        </group>
+                        <group string='Account Move Extra Line'>
+                            <field name="product_shipping_id"/>
+                            <field name="shipping_tax_rate"/>
+                        </group>
+                        <group string='GiftWrap'>
+                            <field name="giftwrap_product_id"/>
+                            <field name="giftwrap_tax_rate"/>
+                        </group>
+                        <group>
+                            <field name="product_tax_code"/>
+                            <!-- <seperator string='Product Tax Codes'/> -->
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible': [('product_tax_code','=',False)]}">
+                        <page string='Product Tax Codes'>
+                            <field name='amazon_config_tax_code_lines' nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="import_config_amazon_id" invisible="1"/>
+                                    <field name="product_tax_code"/>
+                                    <field name="product_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_import_config_amazon_tree" model="ir.ui.view">
+        <field name="name">import.config.amazon.tree</field>
+        <field name="model">import.config.amazon</field>
+        <field name="arch" type="xml">
+            <tree string="Import Configuration">
+                <field name="name" optional="show"/>
+                <field name="country" optional="show"/>
+                <field name="type" optional="show"/>
+                <field name="document_type" optional="show"/>
+                <field name="company_id" optional="show"/>
+                <field name="journal_id" optional="hide"/>
+                <field name="transaction_type" optional="hide"/>
+                <field name="tax_type" optional="show"/>
+                <field name="tax_rate" optional="show"/>
+                <!-- <field name="seller_tax_registration_jurisdiction"/> -->
+                <field name="general_product_id" optional="show"/>
+                <field name="fiscal_position" optional="show"/>
+                <field name="customer_partner" optional="show"/>
+                <field name="payment_term_id" optional="show"/>
+                <field name="seller_tax_registration_jurisdiction" optional="hide"/>
+                <field name="buyer_tax_registration_jurisdiction" optional="hide"/>
+                <field name="product_shipping_id" optional="hide"/>
+                <field name="shipping_tax_rate" optional="hide"/>
+                <field name="giftwrap_product_id" optional="hide"/>
+                <field name="giftwrap_tax_rate" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_import_config_amazon" model="ir.actions.act_window">
+        <field name="name">Import Configuration Amazon</field>
+        <field name="res_model">import.config.amazon</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_import_config_amazon_tree"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="view_tax_juridiction_tree" model="ir.ui.view">
+        <field name="name">tax.juridiction.tree</field>
+        <field name="model">tax.juridiction</field>
+        <field name="arch" type="xml">
+            <tree string="Tax Juridiction">
+                <field name="name" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_tax_juridiction" model="ir.actions.act_window">
+        <field name="name">Tax Juridiction</field>
+        <field name="res_model">tax.juridiction</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_tax_juridiction_tree"/>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem 
+        name="Tax Juridiction"
+        id="menu_tax_juridiction"
+        parent="menu_back_office_sdt_configuration"
+        action="action_tax_juridiction"
+        sequence="110"/>
+</odoo>

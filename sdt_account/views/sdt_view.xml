@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <menuitem id="account.menu_finance"
+            name="Back Office"/>
+
+        <menuitem 
+            name="FTP Imports"
+            id="menu_imports_header"
+            parent="account.menu_finance"
+            sequence="10"/>
+
+        <menuitem
+            name="Market Place"
+            id="menu_main_market_place"
+            parent="account.menu_finance"
+            sequence="20"/>
+
+        <menuitem
+            name="Configuration"
+            id="menu_back_office_configuration"
+            parent="account.menu_finance"
+            sequence="100"/>
+
+            <menuitem 
+                name="SDT Configuration"
+                id="menu_back_office_sdt_configuration"
+                parent="menu_back_office_configuration"
+                sequence="10"/>
+
+            <menuitem 
+                    name="FTP Configuration"
+                    id="menu_ftp_config"
+                    parent="menu_back_office_configuration"
+                    sequence="20"/>
+
+                <menuitem 
+                    name="FTP Sync"
+                    id="menu_ftp_sync"
+                    parent="menu_ftp_config"
+                    action="action_ftp_sync"
+                    sequence="10"/>
+
+                <menuitem 
+                    name="Import Configuration"
+                    id="menu_import_config"
+                    parent="menu_ftp_config"
+                    action="action_import_config"
+                    sequence="20"/>
+
+                <menuitem 
+                    name="Import Configuration Amazon"
+                    id="menu_import_config_amazon"
+                    parent="menu_ftp_config"
+                    action="action_import_config_amazon"
+                    sequence="30"/>
+
+        <!-- Country Allocation -->
+        <record id="view_country_allocation_form" model="ir.ui.view">
+            <field name="name">country.allocation.form</field>
+            <field name="model">country.allocation</field>
+            <field name="arch" type="xml">
+            <form string="Country Allocation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="active" />
+                            <field name="verification" />
+                        </group>
+                        <group>
+                            <field name="allocation_de" />
+                            <field name="allocation_be" />
+                            <field name="allocation_nl" />
+                            <field name="allocation_fr" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_country_allocation_tree" model="ir.ui.view">
+            <field name="name">country.allocation.tree</field>
+            <field name="model">country.allocation</field>
+            <field name="arch" type="xml">
+                <tree string="Country Allocation">
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="allocation_de" />
+                    <field name="allocation_be" />
+                    <field name="allocation_nl" />
+                    <field name="allocation_fr" />
+                    <field name="verification" />
+                    <field name="active" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_country_allocation" model="ir.actions.act_window">
+            <field name="name">Country Allocation</field>
+            <field name="res_model">country.allocation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_country_allocation_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Country Allocation"
+            id="menu_country_allocation"
+            parent="menu_papersmart"
+            action="action_country_allocation"
+            sequence="50"/>
+
+        <!-- Partner Type -->
+        <record id="view_partner_type_form" model="ir.ui.view">
+            <field name="name">res.partner.type.form</field>
+            <field name="model">res.partner.type</field>
+            <field name="arch" type="xml">
+            <form string="Partner Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="active" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_partner_type_tree" model="ir.ui.view">
+            <field name="name">res.partner.type.tree</field>
+            <field name="model">res.partner.type</field>
+            <field name="arch" type="xml">
+                <tree string="Partner Type">
+                    <field name="name" />
+                    <field name="active" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_partner_type" model="ir.actions.act_window">
+            <field name="name">Partner Type</field>
+            <field name="res_model">res.partner.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_partner_type_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Partner Type"
+            id="menu_partner_type"
+            parent="menu_back_office_sdt_configuration"
+            action="action_partner_type"
+            sequence="20"/>
+
+        <!-- Transaction Type -->
+        <record id="view_market_transaction_type_form" model="ir.ui.view">
+            <field name="name">market.transaction.type.form</field>
+            <field name="model">market.transaction.type</field>
+            <field name="arch" type="xml">
+            <form string="Trasaction Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_market_transaction_type_tree" model="ir.ui.view">
+            <field name="name">market.transaction.type.tree</field>
+            <field name="model">market.transaction.type</field>
+            <field name="arch" type="xml">
+                <tree string="Transaction Type">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_market_transaction_type" model="ir.actions.act_window">
+            <field name="name">Transaction Type</field>
+            <field name="res_model">market.transaction.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_market_transaction_type_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Transaction Type"
+            id="menu_market_transaction_type"
+            parent="menu_back_office_sdt_configuration"
+            action="action_market_transaction_type"
+            sequence="30"/>
+
+        <!-- Market Journal -->
+        <record id="view_market_journal_form" model="ir.ui.view">
+            <field name="name">market.journal.form</field>
+            <field name="model">market.journal</field>
+            <field name="arch" type="xml">
+            <form string="Market Journal">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_market_journal_tree" model="ir.ui.view">
+            <field name="name">market.journal.tree</field>
+            <field name="model">market.journal</field>
+            <field name="arch" type="xml">
+                <tree string="Market Journal">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_market_journal" model="ir.actions.act_window">
+            <field name="name">Market Journal</field>
+            <field name="res_model">market.journal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_market_journal_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Market Journal"
+            id="menu_market_journal"
+            parent="menu_back_office_sdt_configuration"
+            action="action_market_journal"
+            sequence="40"/>
+
+        <!-- Partner Matching -->
+        <record id="view_partner_matching_form" model="ir.ui.view">
+            <field name="name">partner.matching.form</field>
+            <field name="model">partner.matching</field>
+            <field name="arch" type="xml">
+            <form string="Partner Matching">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                             <field name="active" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string='Matching Lines'>
+                            <field name='matching_line_ids' nolabel="1">
+                                 <tree string="Matching Lines" editable="bottom">
+                                    <field name='matching_id' invisible="1"/>
+                                    <field name='partner_name'/>
+                                    <field name='partner_id'/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_partner_matching_tree" model="ir.ui.view">
+            <field name="name">partner.matching.tree</field>
+            <field name="model">partner.matching</field>
+            <field name="arch" type="xml">
+                <tree string="Partner Matching">
+                    <field name="name" />
+                    <field name="active" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_partner_matching" model="ir.actions.act_window">
+            <field name="name">Partner Matching</field>
+            <field name="res_model">partner.matching</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_partner_matching_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Partner Matching"
+            id="menu_partner_matching"
+            parent="menu_papersmart"
+            action="action_partner_matching"
+            sequence="60"/>
+
+        <!-- Audit Template -->
+        <record id="view_audit_template_form" model="ir.ui.view">
+            <field name="name">audit.template.form</field>
+            <field name="model">audit.template</field>
+            <field name="arch" type="xml">
+            <form string="Audit Template">
+                <header>
+                    <button name="action_active" type="object" states="inactive" string="Set Active" class="oe_highlight"/>
+                    <button name="action_inactive" type="object" states="active" string="Set Inactive" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Move ..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="move_id"/>
+                        </group>
+                        <group>
+                             <field name="journal_id" invisible="1"/>
+                             <field name="journal_ids" widget="many2many_tags"/>
+                             <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string='Account Fields'>
+                            <field name="audit_invoice_line"/>
+                            <field name="audit_tax_grid"/>
+                            <field name="audit_vat_country"/>
+                        </group>
+                        <group string='FTP Fields'>
+                             <field name="import_wizard"/>
+                             <field name="audit_06_rate"/>
+                             <field name="audit_variance"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_audit_template_tree" model="ir.ui.view">
+            <field name="name">audit.template.tree</field>
+            <field name="model">audit.template</field>
+            <field name="arch" type="xml">
+                <tree string="Audit Template">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="journal_id" optional="hide"/>
+                    <field name="journal_ids" widget="many2many_tags"/>
+                    <field name="audit_vat_country"/>
+                    <field name="import_wizard"/>
+                    <field name="audit_06_rate"/>
+                    <field name="audit_variance"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_audit_template" model="ir.actions.act_window">
+            <field name="name">Audit Template</field>
+            <field name="res_model">audit.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_audit_template_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Audit Template"
+            id="menu_audit_template"
+            parent="menu_back_office_sdt_configuration"
+            action="action_audit_template"
+            sequence="10"/>
+
+        <record id="set_audit_template_active" model="ir.actions.server">
+          <field name="name">Set Active</field>
+          <field name="model_id" ref="sdt_account.model_audit_template"/>
+          <field name="binding_model_id" ref="sdt_account.model_audit_template"/>
+          <field name="state">code</field>
+          <field name="code">records.action_active()</field>
+        </record>
+
+        <record id="set_audit_template_inactive" model="ir.actions.server">
+          <field name="name">Set Inactive</field>
+          <field name="model_id" ref="sdt_account.model_audit_template"/>
+          <field name="binding_model_id" ref="sdt_account.model_audit_template"/>
+          <field name="state">code</field>
+          <field name="code">records.action_inactive()</field>
+        </record>
+
+        <record id="link_journals_audit_template" model="ir.actions.server">
+          <field name="name">Link Journals</field>
+          <field name="model_id" ref="sdt_account.model_audit_template"/>
+          <!-- <field name="binding_model_id" ref="sdt_account.model_audit_template"/> -->
+          <field name="state">code</field>
+          <field name="code">records.server_action_set_journals()</field>
+        </record>
+
+        <!-- Market Statement -->
+        <record id="view_market_statement_form" model="ir.ui.view">
+            <field name="name">market.statement.form</field>
+            <field name="model">market.statement</field>
+            <field name="arch" type="xml">
+            <form string="Market Statement">
+                <header>
+                    <button string="Reconcile" class="oe_highlight" name="link_account_move_to_lines" type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_title oe_inline">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="market_journal_id" widget="selection"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="market_partner_id"/>
+                            <field name="bank_statement_line_id"/>
+                        </group>
+                        <group name="market_place">
+                            <field name="market_reserve_start"/>
+                            <field name="market_start_date"/>
+                            <field name="market_reserve_end"/>
+                            <field name="market_end_date"/>
+                            <field name="market_amount"/>
+                            <field name="market_deposit_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Transactions" name="statement_line_ids">
+                            <field name="market_statement_line_ids">
+                                <tree string="Statement lines" editable="bottom" limit="500">
+
+                                    <!-- Invisible fields -->
+                                    <field name="market_statement_id" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+
+                                    <!-- Visible fields -->
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="date"/>
+                                    <field name="payment_ref"/>
+                                    <field name="partner_id" domain="['|', ('parent_id','=', False), ('is_company','=',True)]"/>
+                                    <field name="ref" optional="hidden"/>
+                                    <field name="transaction_type" optional="hidden"/>
+                                    <field name="internal_notes" string="Notes" optional="hidden"/>
+                                    <field name="amount"/>
+                                    <field name="amount_currency" optional="hidden" groups="base.group_multi_currency"/>
+                                    <field name="foreign_currency_id" optional="hidden" groups="base.group_multi_currency"/>
+                                    <field name="state"/>
+
+                                    <!-- Buttons -->
+                                    <!-- <button name="button_undo_reconciliation" type="object" attrs="{'invisible': [('is_reconciled', '=', False)], 'column_invisible': [('parent.state', '!=', 'posted')]}" string="Revert reconciliation" icon="fa-undo"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other Informations" name="market_transaction_line_ids">
+                            <field name="market_transaction_line_ids">
+                                <tree editable="top">
+                                    <field name="market_statement_id" invisible="1"/>
+                                    <field name="transaction_type_id"/>
+                                    <field name="date"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div> -->
+            </form>
+            </field>
+        </record>
+
+        <record id="view_market_statement_tree" model="ir.ui.view">
+            <field name="name">market.statement.tree</field>
+            <field name="model">market.statement</field>
+            <field name="arch" type="xml">
+                <tree string="Market Statement">
+                    <field name="name"/>
+                    <field name="market_journal_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="market_partner_id"/>
+                    <field name="market_reserve_start"/>
+                    <field name="market_start_date"/>
+                    <field name="market_reserve_end"/>
+                    <field name="market_end_date"/>
+                    <field name="market_amount"/>
+                    <field name="market_deposit_date" optional="hidden"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_market_statement" model="ir.actions.act_window">
+            <field name="name">Market Statement</field>
+            <field name="res_model">market.statement</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_market_statement_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Market Statement"
+            id="menu_market_statement"
+            parent="menu_main_market_place"
+            action="action_market_statement"
+            sequence="10"/>
+
+        <!-- Market Statement Line-->
+        <record id="view_market_statement_line_form" model="ir.ui.view">
+            <field name="name">market.statement.line.form</field>
+            <field name="model">market.statement.line</field>
+            <field name="arch" type="xml">
+            <form string="Market Statement Line">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="new,matched,pending"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="kanban_state" string="Kanban State" widget="state_selection"/>
+                        <!-- Displayed fields -->
+                        <field name="market_statement_id"/>
+                        <field name="date"/>
+                        <field name="payment_ref"/>
+                        <field name="ref"/>
+                        <field name="partner_id"/>
+                        <field name="amount"/>
+                        <field name="sequence"/>
+                        <field name="transaction_type"/>
+                    </group>
+                    <group name="account_move">
+                        <group string="Account Move">
+                            <field name="move_id"/>
+                            <field name="move_amount_total"/>
+                            <field name="audit_delta" attrs="{'invisible': [('audit_delta','=',0)]}"  style="background-color: red;color: White;font-weight: bold;"/>
+                            <field name="audit_delta" attrs="{'invisible': [('audit_delta','!=',0)]}"  style="background-color: green;color: White;font-weight: bold;"/>
+                        </group>
+                        <group string='Matched Account Moves' attrs="{'invisible': [('state','!=','pending_multiple')]}">
+                            <field name="move_ids" nolabel='1' widget="One2many"/>
+                        </group>
+                    </group>
+                    <group col="4" name="market_place" string="Market Place">
+                        <field name="market_place"/>
+                        <field name="fulfillment"/>
+                        <field name="price_principal"/>
+                        <field name="com_principal"/>
+                        <field name="price_tax"/>
+                        <field name="com_variable"/>
+                        <field name="price_returnshipping"/>
+                        <field name="com_refund"/>
+                        <field name="price_shipping"/>
+                        <field name="com_shipping"/>
+                        <field name="price_shippingtax"/>
+                        <field name="com_total"/>
+                        <field name="posted_date_char"/>
+                    </group>
+                    <separator string="Internal Notes"/>
+                    <field name="internal_notes" class="text-monospace"/>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_market_statement_line_tree" model="ir.ui.view">
+            <field name="name">market.statement.line.tree</field>
+            <field name="model">market.statement.line</field>
+            <field name="arch" type="xml">
+                <tree string="Market Statement Line">
+                    <!-- Invisible fields -->
+                    <field name="sequence" readonly="1" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+
+                    <!-- Displayed fields -->
+                    <field name="market_statement_id" optional="hide"/>
+                    <field name="move_id"/>
+                    <field name="date"/>
+                    <field name="payment_ref"/>
+                    <field name="ref" groups="base.group_no_one"/>
+                    <field name="partner_id"/>
+                    <field name="amount"/>
+                    <field name="amount_currency" optional="hidden" groups="base.group_multi_currency"/>
+                    <field name="foreign_currency_id" optional="hidden" groups="base.group_multi_currency"/>
+                    <field name="transaction_type" optional="hidden"/>
+                    <field name="internal_notes" optional="hidden"/>
+                    <field name="state" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_market_statement_line_search" model="ir.ui.view">
+            <field name="name">market.statement.line.search</field>
+            <field name="model">market.statement.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Statement Line">
+                    <field name="ref" string="Statement Line" filter_domain="['|', ('ref', 'ilike', self), ('payment_ref', 'ilike', self)]"/>
+                    <field name="move_id"/>
+                    <field name="partner_id" operator="child_of"/>
+                    <field name="date" string="Period"/>
+                    <separator/>
+                    <filter name="new" string="New" domain="[('state','=','new')]"/>
+                    <filter name="matched" string="Matched" domain="[('state', '=', 'matched')]"/>
+                    <filter name="pending" string="Pending" domain="[('state', '=', 'pending')]"/>
+                    <filter name="pending_multiple" string="Pending Multiple" domain="[('state', '=', 'pending_multiple')]"/>
+                    <separator/>
+                    <filter name="date" string="Date" date="date"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Statement" name="statement" context="{'group_by':'market_statement_id'}"/>
+                        <filter string="Partner" name="partner_id" context="{'group_by':'partner_id'}"/>
+                        <filter string="Trasaction Type" name="transaction_type" context="{'group_by':'transaction_type'}"/>
+                        <filter string="State" name="state" context="{'group_by':'state'}"/>
+                        <separator/>
+                        <filter string="Date" name="date" context="{'group_by': 'date'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="action_market_statement_line" model="ir.actions.act_window">
+            <field name="name">Market Statement Line</field>
+            <field name="res_model">market.statement.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_market_statement_line_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Market Statement Line"
+            id="menu_market_statement_line"
+            parent="menu_main_market_place"
+            action="action_market_statement_line"
+            sequence="200"/>
+
+        <record id="action_link_move" model="ir.actions.server">
+            <field name="name">Link Move</field>
+            <field name="model_id" ref="sdt_account.model_market_statement_line"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_statement_line"/>
+            <!-- <field name="binding_view_types">list</field> -->
+            <field name="state">code</field>
+            <field name="code">records.server_action_link_move()</field>
+        </record>
+
+        <!-- Market Amazon -->
+        <record id="view_market_amazon_form" model="ir.ui.view">
+            <field name="name">market.amazon.form</field>
+            <field name="model">market.amazon</field>
+            <field name="arch" type="xml">
+            <form string="Market Amazon">
+                <header>
+                    <button name="action_assign_config" type="object" states="new,blocked" string="Validate" class="oe_highlight"/>
+                    <button name="action_new" type="object" states="todo,blocked,cancel" string="Set to New" class="oe_highlight"/>
+                    <button name="generate_inv_bills" type="object" string="Generate INV/Bills" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state','!=','todo'),('import_config_id','=',False)]}"/>
+                    <button name="action_cancel" type="object" states="new,todo,blocked" string="Cancel"/>
+                    <field name='state' widget='statusbar'/>
+                </header>
+                <sheet>
+                    <div class="oe_title oe_inline">
+                        <label for="name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="marketplace_id"/>
+                            <field name="merchant_id"/>
+                            <field name="order_date" invisible="1"/>
+                            <field name="order_date_date"/>
+                            <field name="transaction_type"/>
+                            <field name="is_invoice_corrected"/>
+                            <field name="order_id"/>
+                            <field name="shipment_date" invisible="1"/>
+                            <field name="shipment_date_date"/>
+                            <field name="shipment_id"/>
+                            <field name="transaction_id"/>
+                            <field name="currency"/>
+                        </group>
+                        <group>
+                            <field name="tax_calculation_date" invisible="1"/>
+                            <field name="tax_calculation_date_date"/>
+                            <field name="tax_rate" style="background-color: CornflowerBlue;color: White;font-weight: bold;"/>
+                            <field name="product_tax_code" style="background-color: CornflowerBlue;color: White;font-weight: bold;"/>
+                            <field name="tax_type"/>
+                            <field name="tax_calculation_reason_code"/>
+                            <field name="tax_reporting_scheme"/>
+                            <field name="tax_collection_responsibility"/>
+                            <field name="tax_address_role"/>
+                            <field name="jurisdiction_level"/>
+                            <field name="jurisdiction_name"/>
+                        </group>
+                        <group>
+                            <field name="seller_tax_registration"/>
+                            <field name="seller_tax_registration_jurisdiction" style="background-color: CornflowerBlue;color: White;font-weight: bold;"/>
+                            <field name="buyer_tax_registration"/>
+                            <field name="buyer_tax_registration_jurisdiction" style="background-color: CornflowerBlue;color: White;font-weight: bold;"/>
+                            <field name="buyer_tax_tegistration_type"/>
+                            <field name="buyer_envoice_account_id"/>
+                        </group>
+                        <group>
+                            <field name="vat_invoice_number"/>
+                            <field name="export_outside_eu"/>
+                            <field name="return_fc_country"/>
+                            <field name="is_amazon_invoiced"/>
+                            <field name="original_vat_invoice_number"/>
+                        </group>
+                        <group>
+                            <field name="ship_from_city"/>
+                            <field name="ship_from_state"/>
+                            <field name="ship_from_country"/>
+                            <field name="ship_from_postal_code"/>
+                            <field name="ship_from_tax_location_code"/>
+                        </group>
+                        <group>
+                            <field name="ship_to_city"/>
+                            <field name="ship_to_state"/>
+                            <field name="ship_to_country"/>
+                            <field name="ship_to_postal_code"/>
+                            <field name="ship_to_location_code"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="invoice_url"/>
+                        <field name="einvoice_url"/>
+                        <field name="invoice_correction_details"/>
+                    </group>
+                    <notebook>
+                        <page name='sku_price' string='SKU - Price'>
+                            <group>
+                                <group>
+                                    <field name="general_product_id"/>
+                                    <field name="asin"/>
+                                    <field name="sku"/>
+                                    <field name="quantity"/>
+                                </group>
+                                <group>
+                                    <field name="our_price_tax_inc_selling_price"/>
+                                    <field name="our_price_tax_amount"/>
+                                    <field name="our_price_tax_exc_selling_price"/>
+                                    <field name="our_price_tax_inc_promo_amount"/>
+                                    <field name="our_price_tax_amount_promo"/>
+                                    <field name="our_price_tax_exc_promo_amount"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="shipping_tax_inc_selling_price"/>
+                                    <field name="shipping_tax_amount"/>
+                                    <field name="shipping_tax_exc_selling_price"/>
+                                    <field name="shipping_tax_inc_promo_amount"/>
+                                    <field name="shipping_tax_amount_promo"/>
+                                    <field name="shipping_tax_exc_promo_amount"/>
+                                </group>
+                                <group>
+                                    <field name="giftwrap_tax_inc_selling_price"/>
+                                    <field name="giftwrap_tax_amount"/>
+                                    <field name="giftwrap_tax_exc_selling_price"/>
+                                    <field name="giftwrap_tax_inc_promo_amount"/>
+                                    <field name="giftwrap_tax_amount_promo"/>
+                                    <field name="giftwrap_tax_exc_promo_amount"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name='currency-sdi' string='Currency - SDI'>
+                            <group>
+                                <group>
+                                    <field name="invoice_level_currency_code"/>
+                                    <field name="invoice_level_exchange_rate"/>
+                                    <field name="invoice_level_exchange_rate_date"/>
+                                    <field name="converted_tax_amount"/>
+                                </group>
+                                <group>
+                                    <field name="sdi_invoice_delivery_status"/>
+                                    <field name="sdi_invoice_error_code"/>
+                                    <field name="sdi_invoice_error_description"/>
+                                    <field name="sdi_invoice_status_last_updated_date"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name='other_details' string='Other Details'>
+                            <group>
+                                <group>
+                                    <field name='create_date'/>
+                                    <field name='create_uid'/>
+                                    <field name='write_date'/>
+                                    <field name='write_uid'/>
+                                </group>
+                                <group>
+                                    <field name="total_tax_excluded"/>
+                                    <field name="total_tax"/>
+                                    <field name="total_tax_included"/>
+                                </group>
+                                <group>
+                                    <field name='record_created_from'/>
+                                    <field name='import_config_id'/>
+                                    <field name="sale_invoice_id" attrs="{'invisible': [('sale_invoice_id','=',False)]}"/>
+                                    <field name="cn_invoice_id" attrs="{'invisible': [('cn_invoice_id','=',False)]}"/>
+                                    <field name="reason_for_blocking" attrs="{'invisible': [('state','!=','blocked')]}" style="background-color: red;color: White;font-weight: bold;"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div> -->
+            </form>
+            </field>
+        </record>
+
+        <record id="view_market_amazon_tree" model="ir.ui.view">
+            <field name="name">market.amazon.tree</field>
+            <field name="model">market.amazon</field>
+            <field name="arch" type="xml">
+                <tree string="Market Amazon">
+                    <field name="marketplace_id" optional="show"/>
+                    <field name="merchant_id" optional="show"/>
+                    <field name="order_date_date" optional="show"/>
+                    <field name="transaction_type" optional="show"/>
+                    <field name="tax_type" optional="show"/>
+                    <field name="tax_rate" optional="show"/>
+                    <field name="tax_calculation_reason_code" optional="hide"/>
+                    <field name="is_invoice_corrected" optional="show"/>
+                    <field name="order_id" optional="show"/>
+                    <field name="shipment_date_date" optional="show"/>
+                    <field name="shipment_id" optional="show"/>
+                    <field name="transaction_id" optional="show"/>
+                    <field name="general_product_id" optional="show"/>
+                    <field name="total_tax_excluded" optional="show" sum='Total Tax Excluded'/>
+                    <field name="total_tax" optional="show" sum='Total Tax'/>
+                    <field name="total_tax_included" optional="show" sum='Total Tax Included'/>
+                    <field name="state" optional="show"/>
+                    <field name="import_config_id" optional="show"/>
+                    <!-- <field name="seller_tax_registration_jurisdiction"/> -->
+                    <field name="seller_tax_registration_jurisdiction" optional="hide"/>
+                    <field name="buyer_tax_registration_jurisdiction" optional="hide"/>
+                    <field name="our_price_tax_inc_promo_amount" optional="hide"/>
+                    <field name="shipping_tax_inc_promo_amount" optional="hide"/>
+                    <field name="giftwrap_tax_inc_promo_amount" optional="hide"/>
+                    <field name="record_created_from" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_market_amazon_search" model="ir.ui.view">
+            <field name="name">market.amazon.search</field>
+            <field name="model">market.amazon</field>
+            <field name="arch" type="xml">
+                <search string="Search Market Amazon Recrods">
+                    <field name="merchant_id" string="Document Number" filter_domain="[
+                        '|', '|', '|', '|','|', '|','|', 
+                        ('merchant_id', 'ilike', self), ('order_id', 'ilike', self), 
+                        ('shipment_id', 'ilike', self), ('transaction_id', 'ilike', self),
+                        ('seller_tax_registration', 'ilike', self), ('vat_invoice_number', 'ilike', self),
+                        ('asin', 'ilike', self), ('sku', 'ilike', self)]"/>
+                    <filter name="todo_blocked" string="TO DO and Blocked" domain="[('state','in',('todo','blocked'))]"/>
+                    <filter name="todo" string="TO DO" domain="[('state','=','todo')]"/>
+                    <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                    <filter name="blocked" string="Blocked" domain="[('state','=','blocked')]"/>
+                    <filter name="cancelled" string="Cancelled" domain="[('state','=','cancel')]"/>
+                    <separator/>
+                    <filter name="jurisdiction_name" string="Germany" domain="[('jurisdiction_name','=','GERMANY')]"/>
+                    <separator/>
+                    <filter name="shipment" string="SHIPMENT" domain="[('transaction_type','=','SHIPMENT')]"/>
+                    <filter name="credit_note" string="REFUND" domain="[('transaction_type','=','REFUND')]"/>
+                    <separator/>
+                    <field name="merchant_id"/>
+                    <field name="order_id"/>
+                    <field name="shipment_id"/>
+                    <field name="transaction_id"/>
+                    <field name="seller_tax_registration"/>
+                    <field name="vat_invoice_number"/>
+                    <field name="asin"/>
+                    <field name="sku"/>
+                    <field name="jurisdiction_name"/>
+                    <separator/>
+                    <group expand='0' string='Group by...'>
+                        <filter string='Transaction Type' name='transaction_type' domain="[]" context="{'group_by': 'transaction_type'}"/>
+                        <separator/>
+                        <filter string='Status' name='state' domain="[]" context="{'group_by': 'state'}"/>
+                        <separator/>
+                        <filter string='Tax Type' name='tax_type' domain="[]" context="{'group_by': 'tax_type'}"/>
+                        <filter string='Tax Calculation Reason Code' name='tax_calculation_reason_code' domain="[]" context="{'group_by': 'tax_calculation_reason_code'}"/>
+                        <filter string='Jurisdiction Name' name='jurisdiction_name' domain="[]" context="{'group_by': 'jurisdiction_name'}"/>
+                        <separator/>
+                        <filter string='Seller Tax Registration Jurisdiction' name='seller_tax_registration_jurisdiction' domain="[]" context="{'group_by': 'seller_tax_registration_jurisdiction'}"/>
+                        <filter string='Buyer Tax Registration Jurisdiction' name='buyer_tax_registration_jurisdiction' domain="[]" context="{'group_by': 'buyer_tax_registration_jurisdiction'}"/>
+                        <separator/>
+                        <filter string='General Product' name='general_product_id' domain="[]" context="{'group_by': 'general_product_id'}"/>
+                        <filter string='Import Configuration' name='import_config_id' domain="[]" context="{'group_by': 'import_config_id'}"/>
+                        <filter string='Record Created From' name='record_created_from' domain="[]" context="{'group_by': 'record_created_from'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_market_amazon" model="ir.actions.act_window">
+            <field name="name">Market Amazon</field>
+            <field name="res_model">market.amazon</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_market_amazon_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem 
+            name="Market Amazon"
+            id="menu_market_amazon"
+            parent="menu_main_market_place"
+            action="action_market_amazon"
+            sequence="50"/>
+
+        <record id="action_cancel_blocked_market_amazon" model="ir.actions.server">
+            <field name="name">Cancel State</field>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="state">code</field>
+            <field name="code">records.action_cancel_blocked()</field>
+        </record>
+
+        <record id="validate_market_amazon" model="ir.actions.server">
+            <field name="name">Validate Entries</field>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="state">code</field>
+            <field name="code">records.action_assign_config()</field>
+        </record>
+
+        <record id="cancel_market_amazon" model="ir.actions.server">
+            <field name="name">Cancel Entries</field>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="state">code</field>
+            <field name="code">records.action_cancel()</field>
+        </record>
+
+        <record id="new_market_amazon" model="ir.actions.server">
+            <field name="name">Set New</field>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="state">code</field>
+            <field name="code">records.action_new()</field>
+        </record>
+
+        <record id="todo_market_amazon" model="ir.actions.server">
+            <field name="name">Set TODO</field>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="state">code</field>
+            <field name="code">records.action_todo()</field>
+        </record>
+
+        <record id="generate_entries_market_amazon" model="ir.actions.server">
+            <field name="name">Generate INV/Bills</field>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="state">code</field>
+            <field name="code">records.generate_inv_bills()</field>
+        </record>
+
+        <record id="action_update_record_created_from" model="ir.actions.server">
+            <field name="name">Update Record Created From</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_model_id" ref="sdt_account.model_market_amazon"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.action_record_created_from()
+            </field>
+        </record>
+
+        <!-- account_change_lock_date_log -->
+        <record id="view_account_change_lock_date_log_form" model="ir.ui.view">
+            <field name="name">account.change.lock.date.log.form</field>
+            <field name="model">account.change.lock.date.log</field>
+            <field name="arch" type="xml">
+            <form string="Audit Template">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            
+                        </group>
+                        <group>
+                            
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_account_change_lock_date_log_tree" model="ir.ui.view">
+            <field name="name">account.change.lock.date.log.tree</field>
+            <field name="model">account.change.lock.date.log</field>
+            <field name="arch" type="xml">
+                <tree string="Audit Template">
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_account_change_lock_date_log" model="ir.actions.act_window">
+            <field name="name">Audit Template</field>
+            <field name="res_model">account.change.lock.date.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_account_change_lock_date_log_tree"/>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem 
+            name="Lock Date Change Log"
+            id="menu_account_change_lock_date_log"
+            parent="menu_back_office_sdt_configuration"
+            action="action_account_change_lock_date_log"
+            sequence="100"/> -->
+</odoo>
+

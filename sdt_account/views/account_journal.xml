@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <record id="view_account_journal_form_sdt" model="ir.ui.view">
+            <field name="name">account.journal.sdt</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='bank_account']" position='after'>
+                    <page name="sdt" string="SDT">
+                        <group>
+                            <group>
+                                <field name="sdt_global"/>
+                                <field name="sdt_papersmart"/>
+                                <field name="sdt_distrismart"/>
+                                <field name="update_market_partner"/>
+                                <field name="update_audit_status"/>
+                            </group>
+                            <group>
+                                <field name="single_partner" attrs="{'required': [('update_market_partner','=',True)]}"/>
+                                <field name="journal_partner_id" attrs="{'required': [('update_market_partner','=',True)]}"/>
+                                <field name="department_id"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <record id="hr_timesheet_line_meeting_form" model="ir.ui.view">
+            <field name="name">account.analytic.line.form.inherit.meeting</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
+            <field name="arch" type="xml">
+                <field name="task_id" position="after">
+                    <field name="meeting" readonly="1"/>
+                </field>
+            </field>
+        </record> -->
+
+</odoo>
