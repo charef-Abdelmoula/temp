@@ -8,12 +8,12 @@
             <form string="ACC Update">
                 <group>
                     <field name="company_id" invisible="1"/>
-                    <field name="country" attrs="{'invisible':[('import_warning','!=',False)]}"/>
-                    <field name="import_warning" readonly="1" attrs="{'invisible':[('import_warning','=',False)]}"/>
+                    <field name="country" invisible="import_warning != False"/>
+                    <field name="import_warning" readonly="1" invisible="import_warning == False"/>
                 </group>
                 <footer>
-                    <button name="generate_inv_bills" string="Generate Inv/Bills" class="oe_highlight" type="object" attrs="{'invisible':[('import_warning','!=',False)]}"/>
-                    <button name="cancel" special="cancel" string="Close" class="oe_link" attrs="{'invisible':[('import_warning','=',False)]}"/>
+                    <button name="generate_inv_bills" string="Generate Inv/Bills" class="oe_highlight" type="object" invisible="import_warning != False"/>
+                    <button name="cancel" special="cancel" string="Close" class="oe_link" invisible="import_warning == False"/>
                     or
                     <button name="cancel" special="cancel" string="Cancel" class="oe_link"/>
                 </footer>

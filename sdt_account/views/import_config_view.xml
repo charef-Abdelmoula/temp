@@ -36,99 +36,99 @@
                                 - For Purchase: "Import Bills and Refund INVO6"<p/>
                                 - For Sales: "Import Invoices and Credut Notes INVO6"<p/>
                             <table class="table table-sm">
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (MA)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV01(DS) / DE</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (MACN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV01(DS) / DE</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (SLS)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV11(DS) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (SCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV11(DS) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (AMZ)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV21(DS-Amazon) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (AMZCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV21(DS-Amazon) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (SCMP)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV31(DS-ConradMP) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (SCNCMP)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV31(DS-ConradMP) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (KFL)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer not yet! for future platforms (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-SLS (KFLCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer not yet! for future platforms (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-PUR (PUR)-invoice</span></td>
                                     <td class="text-left"><span>--> Vendor BILL11 (DS) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','DE')]}">
+                                <tr invisible="country != 'DE'">
                                     <td class="text-left"><span>* DE-PUR (PCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Vendor BILL11 (DS) / DE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                <tr invisible="country != 'BE'">
                                     <td class="text-left"><span>* BE-SLS (SLS)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV12 (DS) / BE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                <tr invisible="country != 'BE'">
                                     <td class="text-left"><span>* BE-SLS (SCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV12 (DS) / BE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                <tr invisible="country != 'BE'">
                                     <td class="text-left"><span>* BE-SLS (MA)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV02 (DS) / BE</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                <tr invisible="country != 'BE'">
                                     <td class="text-left"><span>* BE-SLS (MACN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV02 (DS) / BE</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                <tr invisible="country != 'BE'">
                                     <td class="text-left"><span>* BE-PUR (PUR)-invoice</span></td>
                                     <td class="text-left"><span>--> Vendor BILL12 (DS) / BE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','BE')]}">
+                                <tr invisible="country != 'BE'">
                                     <td class="text-left"><span>* BE-PUR (PCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Vendor BILL12 (DS) / BE (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                <tr invisible="country != 'NL'">
                                     <td class="text-left"><span>* NL-SLS (SLS)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV13 (DS) / NL (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                <tr invisible="country != 'NL'">
                                     <td class="text-left"><span>* NL-SLS (SCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV13 (DS) / NL (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                <tr invisible="country != 'NL'">
                                     <td class="text-left"><span>* NL-SLS (MA)-invoice</span></td>
                                     <td class="text-left"><span>--> Customer INV03 (DS) / NL</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                <tr invisible="country != 'NL'">
                                     <td class="text-left"><span>* NL-SLS (MACN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Customer INV03 (DS) / NL</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                <tr invisible="country != 'NL'">
                                     <td class="text-left"><span>* NL-PUR (PUR)-invoice</span></td>
                                     <td class="text-left"><span>--> Vendor BILL13 (DS) / NL (06)</span></td>
                                 </tr>
-                                <tr attrs="{'invisible': [('country','!=','NL')]}">
+                                <tr invisible="country != 'NL'">
                                     <td class="text-left"><span>* NL-PUR (PCN)-creditnote</span></td>
                                     <td class="text-left"><span>--> Vendor BILL13 (DS) / NL (06)</span></td>
                                 </tr>
@@ -226,7 +226,7 @@
                             <!-- <seperator string='Product Tax Codes'/> -->
                         </group>
                     </group>
-                    <notebook attrs="{'invisible': [('product_tax_code','=',False)]}">
+                    <notebook invisible="product_tax_code == False">
                         <page string='Product Tax Codes'>
                             <field name='amazon_config_tax_code_lines' nolabel="1">
                                 <tree editable="bottom">
@@ -298,10 +298,5 @@
         <field name="context">{}</field>
     </record>
 
-    <menuitem 
-        name="Tax Juridiction"
-        id="menu_tax_juridiction"
-        parent="menu_back_office_sdt_configuration"
-        action="action_tax_juridiction"
-        sequence="110"/>
+
 </odoo>

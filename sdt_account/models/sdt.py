@@ -69,7 +69,7 @@ class AuditTemplate(models.Model):
 
     name = fields.Char(string='Name', required=True, tracking=True)
     move_id = fields.Many2one('account.move', string='Template Created From', tracking=True)
-    company_id = fields.Many2one('res.company', string='Company', required=True, tracking=True)
+    company_id = fields.Many2one('res.company', string='Company', required=True, tracking=True,default=lambda self: self.env.company)
     journal_id = fields.Many2one('account.journal', string='Journal', tracking=True)
     journal_ids = fields.Many2many('account.journal', string='Journals', tracking=True)
     audit_tax_grid = fields.Char(string='Audit Tax Grid', tracking=True)
@@ -123,7 +123,7 @@ class MarketJournal(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Char(string='Name', required=True, tracking=True)
-    company_id = fields.Many2one('res.company', string='Company', required=True, tracking=True)
+    company_id = fields.Many2one('res.company', string='Company', required=True, tracking=True,default=lambda self: self.env.company)
 
 class MarketStatement(models.Model):
     _name= 'market.statement'
@@ -132,7 +132,7 @@ class MarketStatement(models.Model):
 
     name = fields.Char(string='Reference', required=True, tracking=True)
     market_journal_id = fields.Many2one('market.journal', string='Market Journal', required=True)
-    company_id = fields.Many2one('res.company', string='Company', required=True, tracking=True)
+    company_id = fields.Many2one('res.company', string='Company', required=True, tracking=True ,default=lambda self: self.env.company)
     market_partner_id = fields.Many2one('res.partner', string='Partner')
     bank_statement_line_id = fields.Many2one('account.bank.statement.line', string='Bank Statement Line')
     market_start_date = fields.Date(string='Settlement Start Date')

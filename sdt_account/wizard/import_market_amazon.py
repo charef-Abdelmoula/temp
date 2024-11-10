@@ -6,7 +6,7 @@ from datetime import datetime
 import tempfile
 import binascii
 from datetime import date, datetime
-from odoo.exceptions import Warning, UserError
+from odoo.exceptions import UserError
 from odoo import models, fields, exceptions, api, _
 import logging
 _logger = logging.getLogger(__name__)

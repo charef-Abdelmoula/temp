@@ -74,8 +74,9 @@
     <record id="view_account_analytic_line_filter_sdt" model="ir.ui.view">
         <field name="name">account.analytic.line.select</field>
         <field name="model">account.analytic.line</field>
-        <field name="inherit_id" ref="analytic.view_account_analytic_line_filter"/>
+        <field name="inherit_id" ref="account.view_account_analytic_line_filter_inherit_account"/>
         <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='account_id']" position="after">-->
             <xpath expr="//field[@name='account_id']" position="after">
                 <field name="analytic_client"/>
                 <field name="department_id"/>
@@ -83,6 +84,7 @@
                 <field name="hr_id"/>
                 <field name="journal_id"/>
             </xpath>
+<!--            <xpath expr="//filter[@name='account_id']" position="after">-->
             <xpath expr="//filter[@name='account_id']" position="after">
                 <filter string="Analytic Client" context="{'group_by':'analytic_client'}" name="group_analytic_client"/>
                 <filter string="Department" context="{'group_by':'department_id'}" name="group_department"/>
@@ -101,15 +103,15 @@
       <field name="code">records.server_action_update_analytic_client()</field>
     </record>
 
-    <record id="account_analytic_tag_form_view_sdt" model="ir.ui.view">
-        <field name="name">account.analytic.tag.form.sdt</field>
-        <field name="model">account.analytic.tag</field>
-        <field name="inherit_id" ref="analytic.account_analytic_tag_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='company_id']" position="after">
-                <field name="category_id"/>
-            </xpath>
-        </field>
-    </record>
+<!--    <record id="account_analytic_tag_form_view_sdt" model="ir.ui.view">-->
+<!--        <field name="name">account.analytic.tag.form.sdt</field>-->
+<!--        <field name="model">account.analytic.tag</field>-->
+<!--        <field name="inherit_id" ref="analytic.account_analytic_tag_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='company_id']" position="after">-->
+<!--                <field name="category_id"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record> todo:mig-->
 
 </odoo>

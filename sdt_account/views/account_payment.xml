@@ -14,13 +14,14 @@
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
-            <field name='move_id' position='after'>
+<!--            <field name='move_id' position='after'>todo:mig-->
+            <field name='ref' position='before'>
                 <field name='account_move'/>
             </field>
-            <xpath expr="//group[@name='group3']" position='after'>
+            <xpath expr="//group[@name='group2']" position='after'>
                 <group name='cash_discount'>
-                    <field name="cashdiscount_total" attrs="{'invisible': [('cashdiscount_total', '=', 0)]}"/>
-                    <field name="cashdiscount_notes" attrs="{'invisible': [('cashdiscount_total', '=', 0)]}"/>
+                    <field name="cashdiscount_total" invisible="cashdiscount_total == 0"/>
+                    <field name="cashdiscount_notes" invisible="cashdiscount_total == 0"/>
                 </group>
             </xpath>
         </field>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_generate_inv_bills"
+              name="ACC Update"
+              parent="account_accountant.menu_accounting"
+              action="action_generate_inv_bills"
+              sequence="1"/>
+    <menuitem
+            name="SDT Configuration"
+            id="menu_papersmart"
+            parent="account.menu_finance_configuration"
+            sequence="105"/>
+    <menuitem
+            name="PPC PaymentType"
+            id="menu_ppc_paymenttype"
+            parent="menu_papersmart"
+            action="action_ppc_paymenttype"
+            sequence="5"/>
+    <menuitem
+            name="PPC Invoice Line"
+            id="menu_ppc_invocie_line"
+            parent="menu_papersmart"
+            action="action_ppc_invoiceline"
+            sequence="10"/>
+
+    <menuitem
+            name="VAT Period"
+            id="menu_vat_period"
+            parent="menu_papersmart"
+            action="action_vat_period"
+            sequence="30"/>
+    <menuitem
+            name="DS Script"
+            id="menu_ds_script"
+            parent="menu_papersmart"
+            action="action_ds_script"
+            sequence="40"/>
+
+    <menuitem
+            name="Department"
+            id="menu_invoice_department"
+            parent="menu_papersmart"
+            action="action_invoice_department"
+            sequence="80"/>
+    <menuitem
+            name="Periode"
+            id="menu_invoice_periode"
+            parent="menu_papersmart"
+            action="action_invoice_periode"
+            sequence="90"/>
+    <menuitem
+            name="HR"
+            id="menu_invoice_hr"
+            parent="menu_papersmart"
+            action="action_invoice_hr"
+            sequence="100"/>
+    <!-- ////////////////////////////////////////////////////////   -->
+      <menuitem
+            name="Configuration"
+            id="menu_back_office_configuration"
+            parent="account.menu_finance"
+            sequence="100"/>
+<menuitem
+            name="SDT Configuration"
+            id="menu_back_office_sdt_configuration"
+            parent="menu_back_office_configuration"
+            sequence="10"/>
+
+
+    <menuitem
+            name="Tax Juridiction"
+            id="menu_tax_juridiction"
+            parent="menu_back_office_sdt_configuration"
+            action="action_tax_juridiction"
+            sequence="110"/>
+    <!--    /////////////////////////////////////////////////////////-->
+    <menuitem
+            name="Country Allocation"
+            id="menu_country_allocation"
+            parent="menu_papersmart"
+            action="action_country_allocation"
+            sequence="50"/>
+
+    <menuitem
+            name="Partner Type"
+            id="menu_partner_type"
+            parent="menu_back_office_sdt_configuration"
+            action="action_partner_type"
+            sequence="20"/>
+
+    <menuitem
+            name="Transaction Type"
+            id="menu_market_transaction_type"
+            parent="menu_back_office_sdt_configuration"
+            action="action_market_transaction_type"
+            sequence="30"/>
+
+    <menuitem
+            name="Market Journal"
+            id="menu_market_journal"
+            parent="menu_back_office_sdt_configuration"
+            action="action_market_journal"
+            sequence="40"/>
+    <menuitem
+            name="Partner Matching"
+            id="menu_partner_matching"
+            parent="menu_papersmart"
+            action="action_partner_matching"
+            sequence="60"/>
+    <menuitem
+            name="Audit Template"
+            id="menu_audit_template"
+            parent="menu_back_office_sdt_configuration"
+            action="action_audit_template"
+            sequence="10"/>
+      <menuitem
+            name="Market Place"
+            id="menu_main_market_place"
+            parent="account.menu_finance"
+            sequence="20"/>
+    <menuitem
+            name="Market Statement"
+            id="menu_market_statement"
+            parent="menu_main_market_place"
+            action="action_market_statement"
+            sequence="10"/>
+    <menuitem
+            name="Market Statement Line"
+            id="menu_market_statement_line"
+            parent="menu_main_market_place"
+            action="action_market_statement_line"
+            sequence="200"/>
+    <menuitem
+            name="Market Amazon"
+            id="menu_market_amazon"
+            parent="menu_main_market_place"
+            action="action_market_amazon"
+            sequence="50"/>
+    <menuitem id="account.menu_finance"
+              name="Back Office"/>
+
+    <menuitem
+            name="FTP Imports"
+            id="menu_imports_header"
+            parent="account.menu_finance"
+            sequence="10"/>
+    <menuitem
+            name="FTP Data"
+            id="menu_ftp_data"
+            parent="menu_imports_header"
+            action="action_ftp_data"
+            sequence="0"/>
+
+
+
+
+
+
+
+    <menuitem
+            name="FTP Configuration"
+            id="menu_ftp_config"
+            parent="menu_back_office_configuration"
+            sequence="20"/>
+
+    <menuitem
+            name="FTP Sync"
+            id="menu_ftp_sync"
+            parent="menu_ftp_config"
+            action="action_ftp_sync"
+            sequence="10"/>
+
+    <menuitem
+            name="Import Configuration"
+            id="menu_import_config"
+            parent="menu_ftp_config"
+            action="action_import_config"
+            sequence="20"/>
+    <!--    ////////////////////////////////////-->
+<!--    <menuitem-->
+<!--            name="Imports INV05"-->
+<!--            id="menu_imports_inv05_header"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_inv05"-->
+<!--            sequence="10"/>-->
+
+<!--    <menuitem-->
+<!--            name="Imports Bill INV04"-->
+<!--            id="menu_imports_bill_inv04_header"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_bill_inv04"-->
+<!--            sequence="20"/>-->
+
+<!--    <menuitem-->
+<!--            name="Imports Bills and Refunds INV06"-->
+<!--            id="menu_imports_bill_inv06_header"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_bill_inv06"-->
+<!--            sequence="20"/>-->
+<!--    <menuitem-->
+<!--            name="Imports Invoices and Credit Notes"-->
+<!--            id="menu_import_customer_invoices_cn"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_customer_invoices_cn"-->
+<!--            sequence="2"/>-->
+<!--    <menuitem-->
+<!--            name="Import Invoices and Credit Notes Inv06"-->
+<!--            id="menu_imports_inv06_header"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_inv06"-->
+<!--            sequence="21"/>-->
+<!--    <menuitem-->
+<!--            name="Imports INV04"-->
+<!--            id="menu_imports_inv04_header"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_inv04"-->
+<!--            sequence="5"/>-->
+    <menuitem
+            id="menu_import_market_amazon"
+            action="action_import_market_amazon"
+            name="Import Market Amazon"
+            parent="menu_main_market_place"
+            sequence="200"/>
+<!--    <menuitem-->
+<!--            name="Imports Vendor Bills and Refunds"-->
+<!--            id="menu_imports_vendor_bills_cn"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_vendor_bills_cn"-->
+<!--            sequence="2"/>-->
+<!--    <menuitem-->
+<!--            name="Imports Vendor Bills"-->
+<!--            id="menu_imports_vendor_bills"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_vendor_bills"-->
+<!--            sequence="1"/>-->
+<!--    <menuitem-->
+<!--            name="Imports Users"-->
+<!--            id="menu_imports_partners_header"-->
+<!--            parent="menu_imports_header"-->
+<!--            action="action_import_partners"-->
+<!--            sequence="50"/>-->
+
+    <menuitem
+            name="Import Configuration Amazon"
+            id="menu_import_config_amazon"
+            parent="menu_ftp_config"
+            action="action_import_config_amazon"
+            sequence="30"/>
+
+
+</odoo>

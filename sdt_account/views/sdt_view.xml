@@ -1,59 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-        <menuitem id="account.menu_finance"
-            name="Back Office"/>
 
-        <menuitem 
-            name="FTP Imports"
-            id="menu_imports_header"
-            parent="account.menu_finance"
-            sequence="10"/>
-
-        <menuitem
-            name="Market Place"
-            id="menu_main_market_place"
-            parent="account.menu_finance"
-            sequence="20"/>
-
-        <menuitem
-            name="Configuration"
-            id="menu_back_office_configuration"
-            parent="account.menu_finance"
-            sequence="100"/>
-
-            <menuitem 
-                name="SDT Configuration"
-                id="menu_back_office_sdt_configuration"
-                parent="menu_back_office_configuration"
-                sequence="10"/>
-
-            <menuitem 
-                    name="FTP Configuration"
-                    id="menu_ftp_config"
-                    parent="menu_back_office_configuration"
-                    sequence="20"/>
-
-                <menuitem 
-                    name="FTP Sync"
-                    id="menu_ftp_sync"
-                    parent="menu_ftp_config"
-                    action="action_ftp_sync"
-                    sequence="10"/>
-
-                <menuitem 
-                    name="Import Configuration"
-                    id="menu_import_config"
-                    parent="menu_ftp_config"
-                    action="action_import_config"
-                    sequence="20"/>
-
-                <menuitem 
-                    name="Import Configuration Amazon"
-                    id="menu_import_config_amazon"
-                    parent="menu_ftp_config"
-                    action="action_import_config_amazon"
-                    sequence="30"/>
 
         <!-- Country Allocation -->
         <record id="view_country_allocation_form" model="ir.ui.view">
@@ -106,12 +54,6 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Country Allocation"
-            id="menu_country_allocation"
-            parent="menu_papersmart"
-            action="action_country_allocation"
-            sequence="50"/>
 
         <!-- Partner Type -->
         <record id="view_partner_type_form" model="ir.ui.view">
@@ -152,12 +94,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Partner Type"
-            id="menu_partner_type"
-            parent="menu_back_office_sdt_configuration"
-            action="action_partner_type"
-            sequence="20"/>
+
 
         <!-- Transaction Type -->
         <record id="view_market_transaction_type_form" model="ir.ui.view">
@@ -196,12 +133,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Transaction Type"
-            id="menu_market_transaction_type"
-            parent="menu_back_office_sdt_configuration"
-            action="action_market_transaction_type"
-            sequence="30"/>
+
 
         <!-- Market Journal -->
         <record id="view_market_journal_form" model="ir.ui.view">
@@ -242,12 +174,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Market Journal"
-            id="menu_market_journal"
-            parent="menu_back_office_sdt_configuration"
-            action="action_market_journal"
-            sequence="40"/>
+
 
         <!-- Partner Matching -->
         <record id="view_partner_matching_form" model="ir.ui.view">
@@ -299,12 +226,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Partner Matching"
-            id="menu_partner_matching"
-            parent="menu_papersmart"
-            action="action_partner_matching"
-            sequence="60"/>
+
 
         <!-- Audit Template -->
         <record id="view_audit_template_form" model="ir.ui.view">
@@ -313,8 +235,8 @@
             <field name="arch" type="xml">
             <form string="Audit Template">
                 <header>
-                    <button name="action_active" type="object" states="inactive" string="Set Active" class="oe_highlight"/>
-                    <button name="action_inactive" type="object" states="active" string="Set Inactive" class="oe_highlight"/>
+                    <button name="action_active" type="object" invisible="state != 'inactive'" string="Set Active" class="oe_highlight"/>
+                    <button name="action_inactive" type="object" invisible="state != 'active'" string="Set Inactive" class="oe_highlight"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -378,12 +300,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Audit Template"
-            id="menu_audit_template"
-            parent="menu_back_office_sdt_configuration"
-            action="action_audit_template"
-            sequence="10"/>
+
 
         <record id="set_audit_template_active" model="ir.actions.server">
           <field name="name">Set Active</field>
@@ -514,12 +431,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Market Statement"
-            id="menu_market_statement"
-            parent="menu_main_market_place"
-            action="action_market_statement"
-            sequence="10"/>
+
 
         <!-- Market Statement Line-->
         <record id="view_market_statement_line_form" model="ir.ui.view">
@@ -547,10 +459,10 @@
                         <group string="Account Move">
                             <field name="move_id"/>
                             <field name="move_amount_total"/>
-                            <field name="audit_delta" attrs="{'invisible': [('audit_delta','=',0)]}"  style="background-color: red;color: White;font-weight: bold;"/>
-                            <field name="audit_delta" attrs="{'invisible': [('audit_delta','!=',0)]}"  style="background-color: green;color: White;font-weight: bold;"/>
+                            <field name="audit_delta" invisible="audit_delta == 0"  style="background-color: red;color: White;font-weight: bold;"/>
+                            <field name="audit_delta" invisible="audit_delta != 0"  style="background-color: green;color: White;font-weight: bold;"/>
                         </group>
-                        <group string='Matched Account Moves' attrs="{'invisible': [('state','!=','pending_multiple')]}">
+                        <group string='Matched Account Moves' invisible="state != 'pending_multiple'">
                             <field name="move_ids" nolabel='1' widget="One2many"/>
                         </group>
                     </group>
@@ -638,12 +550,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Market Statement Line"
-            id="menu_market_statement_line"
-            parent="menu_main_market_place"
-            action="action_market_statement_line"
-            sequence="200"/>
+
 
         <record id="action_link_move" model="ir.actions.server">
             <field name="name">Link Move</field>
@@ -661,11 +568,11 @@
             <field name="arch" type="xml">
             <form string="Market Amazon">
                 <header>
-                    <button name="action_assign_config" type="object" states="new,blocked" string="Validate" class="oe_highlight"/>
-                    <button name="action_new" type="object" states="todo,blocked,cancel" string="Set to New" class="oe_highlight"/>
+                    <button name="action_assign_config" type="object" invisible="state not in ['new','blocked']" string="Validate" class="oe_highlight"/>
+                    <button name="action_new" type="object" invisible="state not in ['todo','blocked','cancel']" string="Set to New" class="oe_highlight"/>
                     <button name="generate_inv_bills" type="object" string="Generate INV/Bills" class="oe_highlight"
-                            attrs="{'invisible': ['|',('state','!=','todo'),('import_config_id','=',False)]}"/>
-                    <button name="action_cancel" type="object" states="new,todo,blocked" string="Cancel"/>
+                            invisible="state != 'todo' or import_config_id == False"/>
+                    <button name="action_cancel" type="object" invisible="state not in ['new','todo','blocked']" string="Cancel"/>
                     <field name='state' widget='statusbar'/>
                 </header>
                 <sheet>
@@ -805,9 +712,9 @@
                                 <group>
                                     <field name='record_created_from'/>
                                     <field name='import_config_id'/>
-                                    <field name="sale_invoice_id" attrs="{'invisible': [('sale_invoice_id','=',False)]}"/>
-                                    <field name="cn_invoice_id" attrs="{'invisible': [('cn_invoice_id','=',False)]}"/>
-                                    <field name="reason_for_blocking" attrs="{'invisible': [('state','!=','blocked')]}" style="background-color: red;color: White;font-weight: bold;"/>
+                                    <field name="sale_invoice_id" invisible="sale_invoice_id == False"/>
+                                    <field name="cn_invoice_id" invisible="cn_invoice_id == False"/>
+                                    <field name="reason_for_blocking" invisible="state != 'blocked'" style="background-color: red;color: White;font-weight: bold;"/>
                                 </group>
                             </group>
                         </page>
@@ -916,12 +823,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Market Amazon"
-            id="menu_market_amazon"
-            parent="menu_main_market_place"
-            action="action_market_amazon"
-            sequence="50"/>
+
 
         <record id="action_cancel_blocked_market_amazon" model="ir.actions.server">
             <field name="name">Cancel State</field>

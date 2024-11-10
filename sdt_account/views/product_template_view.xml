@@ -17,7 +17,7 @@
                 </div>
             </div>
             <field name="type" position='before'>
-                <field name='ds_vendor' attrs="{'invisible': [('distrismart','=',False)]}" widget='one2many_list'>
+                <field name='ds_vendor' invisible="distrismart == False" widget='one2many_list'>
                     <tree>
                         <field name='name'/>
                         <field name='phone'/>
@@ -45,10 +45,10 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <field name='default_code' position='after'>
-                <field name='ds_ref_de' attrs="{'invisible': [('distrismart','=',False)]}"/>
-                <field name='ds_ref_be' attrs="{'invisible': [('distrismart','=',False)]}"/>
-                <field name='ds_ref_nl' attrs="{'invisible': [('distrismart','=',False)]}"/>
-                <field name='ds_ref_fr' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_de' invisible="distrismart == False"/>
+                <field name='ds_ref_be' invisible="distrismart == False"/>
+                <field name='ds_ref_nl' invisible="distrismart == False"/>
+                <field name='ds_ref_fr' invisible="distrismart == False"/>
             </field>
         </field>
     </record>
@@ -93,10 +93,10 @@
         <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
             <field name='default_code' position='after'>
-                <field name='ds_ref_de' attrs="{'invisible': [('distrismart','=',False)]}"/>
-                <field name='ds_ref_be' attrs="{'invisible': [('distrismart','=',False)]}"/>
-                <field name='ds_ref_nl' attrs="{'invisible': [('distrismart','=',False)]}"/>
-                <field name='ds_ref_fr' attrs="{'invisible': [('distrismart','=',False)]}"/>
+                <field name='ds_ref_de' invisible="distrismart == False"/>
+                <field name='ds_ref_be' invisible="distrismart == False"/>
+                <field name='ds_ref_nl' invisible="distrismart == False"/>
+                <field name='ds_ref_fr' invisible="distrismart == False"/>
             </field>
         </field>
     </record>

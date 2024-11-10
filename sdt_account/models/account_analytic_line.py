@@ -56,7 +56,8 @@ class AccountAnalyticLine(models.Model):
     fr = fields.Boolean(compute='_get_value', string='FR Account', store=True, readonly=True)
 
     analytic_client = fields.Char('Analytic Client')
-    journal_id = fields.Many2one('account.journal', related='move_id.journal_id', string='Journal', store=True, readonly=True)
+    journal_id = fields.Many2one('account.journal', related='move_line_id.journal_id', string='Journal', store=True, readonly=True)
+    # journal_id = fields.Many2one('account.journal', related='move_id.journal_id', string='Journal', store=True, readonly=True)
 
     @api.model 
     def server_action_update_analytic_client(self):
@@ -73,7 +74,8 @@ class AccountAnalyticTagCategory(models.Model):
     name = fields.Char(string='Category Name', index=True, required=True)
 
 class AccountAnalyticTag(models.Model):
-    _inherit = 'account.analytic.tag'
+    # _inherit = 'account.analytic.tag'
+    _name = 'account.analytic.tag'
 
     category_id = fields.Many2one('account.analytic.tag.category', string='Category')
 

@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form string="Import INV05">
                 <group>
-                     <div attrs="{'invisible':[('import_warning','!=',False)]}" class="oe_grey" colspan="4">
+                     <div invisible="import_warning != False" class="oe_grey" colspan="4">
                         A Valid file will contains following headers.
                         <table class="table table-sm">
                             <thead>
@@ -30,12 +30,12 @@
                      </div>
                 </group>
                 <group>
-                    <field name="file" required="1" attrs="{'invisible':[('import_warning','!=',False)]}"/>
-                    <field name="import_warning" readonly="1" attrs="{'invisible':[('import_warning','=',False)]}"/>
+                    <field name="file" required="1" invisible="import_warning != False"/>
+                    <field name="import_warning" readonly="1" invisible="import_warning == False"/>
                 </group>
                 <footer>
-                    <button name="do_import_inv05" string="Import Invoices (xls)" class="oe_highlight" type="object" attrs="{'invisible':[('import_warning','!=',False)]}"/>
-                    <button name="cancel" special="cancel" string="Close" class="oe_link" attrs="{'invisible':[('import_warning','=',False)]}"/>
+                    <button name="do_import_inv05" string="Import Invoices (xls)" class="oe_highlight" type="object" invisible="import_warning != False"/>
+                    <button name="cancel" special="cancel" string="Close" class="oe_link" invisible="import_warning == False"/>
                     or
                     <button name="cancel" special="cancel" string="Cancel" class="oe_link"/>
                 </footer>
@@ -52,11 +52,6 @@
         <field name="context">{}</field>
     </record>
 
-        <menuitem 
-            name="Imports INV05"
-            id="menu_imports_inv05_header"
-            parent="menu_imports_header"
-            action="action_import_inv05"
-            sequence="10"/>
+
 
 </odoo>

@@ -71,3 +71,11 @@ access_market_amazon,account.market.amazon.accountant,model_market_amazon,accoun
 access_import_market_amazon,account.import.market.amazon.accountant,model_import_market_amazon,account.group_account_user,1,1,1,1
 access_tax_juridiction_accountant,tax_juridiction_accountant,model_tax_juridiction,account.group_account_invoice,1,1,1,0
 access_tax_juridiction_manager,tax_juridiction_manager,model_tax_juridiction,account.group_account_manager,1,1,1,1
+
+access_account_analytic_tag_category,account.analytic.tag.category,model_account_analytic_tag_category,,1,1,1,1
+access_invoice_hr,invoice.hr,model_invoice_hr,,1,1,1,1
+access_invoice_department,invoice.department,model_invoice_department,,1,1,1,1
+access_vat_period,vat.period,model_vat_period,,1,1,1,1
+access_country_allocation,country.allocation,model_country_allocation,,1,1,1,1
+access_partner_matching,partner.matching,model_partner_matching,,1,1,1,1
+access_partner_matching_line,partner.matching.line,model_partner_matching_line,,1,1,1,1

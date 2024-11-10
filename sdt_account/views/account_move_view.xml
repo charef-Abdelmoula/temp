@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <odoo>
 
-        <menuitem id="menu_bank_statement_line"
-                  name="Bank Statement Line"
-                  parent="account.menu_finance_entries_accounting_miscellaneous"
-                  action="account.action_bank_statement_line"
-                  sequence="20"/>
+<!--        <menuitem id="menu_bank_statement_line"-->
+<!--                  name="Bank Statement Line"-->
+<!--                  parent="account.menu_finance_entries_accounting_miscellaneous"-->
+<!--                  action="account.action_bank_statement_line"-->
+<!--                  sequence="20"/>todo:mig-->
 
-        <menuitem id="menu_generate_inv_bills"
-                  name="ACC Update"
-                  parent="account_accountant.menu_accounting"
-                  action="action_generate_inv_bills"
-                  sequence="1"/>
 
         <record id="view_account_tax_form_sdt" model="ir.ui.view">
             <field name="name">account.tax.form.sdt</field>
@@ -131,7 +126,7 @@
                 </xpath> -->
                 <xpath expr="//field[@name='move_type']" position='before'>
                     <h1 class="mt0">
-                        <field name="number_ref" attrs="{'invisible': ['|',('state','in',('draft','proforma','proforma2')),('name','=',False)]}"/>
+                        <field name="number_ref" invisible="state in ('draft','proforma','proforma2') or name == False"/>
                     </h1>
                 </xpath>
                 <xpath expr="//field[@name='name']" position='after'>
@@ -151,7 +146,7 @@
                     <field name='cashdiscount_status' readonly="1"/>
                 </xpath>
                 <xpath expr="//field[@name='amount_residual']" position='after'>
-                    <field name='cashdiscount_total' readonly="1" attrs="{'invisible': [('cashdiscount_total', '=', 0)]}"/>
+                    <field name='cashdiscount_total' readonly="1" invisible="cashdiscount_total == 0"/>
                 </xpath>
                 <!-- <xpath expr="//field[@name='company_id']" position="before">
                     <field name="original_partner_id"/>
@@ -189,12 +184,12 @@
                 <xpath expr="//group[@id='other_tab_group']" position="inside">
                     <group string="FTP Related Info" name="ftp_info_group">
                         <field name='import_wizard'/>
-                        <field name='amazon_invoice' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
-                        <field name='amazon_raw_data_id' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
-                        <field name='amazon_import_config_id' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
-                        <field name='record_created_from' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
-                        <field name='ftp_raw_data_id' attrs="{'invisible':[('ftp_raw_data_id','=',False)]}"/>
-                        <field name="buyer_tax_registration_jurisdiction" attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='amazon_invoice' invisible="amazon_invoice == False"/>
+                        <field name='amazon_raw_data_id' invisible="amazon_invoice == False"/>
+                        <field name='amazon_import_config_id' invisible="amazon_invoice == False"/>
+                        <field name='record_created_from' invisible="amazon_invoice == False"/>
+                        <field name='ftp_raw_data_id' invisible="ftp_raw_data_id == False"/>
+                        <field name="buyer_tax_registration_jurisdiction" invisible="amazon_invoice == False"/>
                         <field name='delta_ex_vat'/>
                         <field name='delta_vat'/>
                         <field name='delta_total'/>
@@ -202,8 +197,8 @@
                         <field name='cashdiscount_expiration'/>
                     </group>
                     <group string="Audit Info" name="audit_info_group">
-                        <field name='audit_06_rate' attrs="{'invisible':[('amazon_invoice','=',True)]}"/>
-                        <field name='amazon_audit_06_rate' attrs="{'invisible':[('amazon_invoice','=',False)]}"/>
+                        <field name='audit_06_rate' invisible="amazon_invoice == False"/>
+                        <field name='amazon_audit_06_rate' invisible="amazon_invoice == False"/>
                         <field name='audit_status'/>
                         <field name='audit_template_id'/>
                         <field name='audit_variance'/>
@@ -212,7 +207,7 @@
                         <field name='audit_invoice_line' readonly='1'/>
                         <field name='audit_vat_country'/>
                         <field name='product_tax_code'/>
-                        <field name='reason_for_cancellation' attrs="{'invisible': [('reason_for_cancellation','=',False)], 'readonly': True}"/>
+                        <field name='reason_for_cancellation' invisible="reason_for_cancellation == False" readonly="True"/>
                     </group>
                     <group string="Pending Fields" name="pending_fields_group">
                         <field name="customer_group"/>
@@ -220,12 +215,12 @@
                         <field name='vat_declaration'/>
                         <field name='vat_check_date' readonly="1"/>
                         <field name='vat_issue_date' readonly="1"/>
-                        <field name='vat_period_id' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
-                        <field name='bill_type' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
+                        <field name='vat_period_id' invisible="vat_declaration == 'done'"/>
+                        <field name='bill_type' invisible="vat_declaration == 'done'"/>
                     </group>
                 </xpath>
                 <xpath expr="//page[@name='other_info']" position='before'>
-                    <page name="paper_smart" string="PaperSmart" attrs="{'invisible': [('ppc_invoice','=',False)]}">
+                    <page name="paper_smart" string="PaperSmart" invisible="ppc_invoice == False">
                         <group>
                             <group string='PaperSmart Import'>
                                 <field name="ppc_invoice" readonly="1"/>
@@ -280,7 +275,7 @@
                             </group>
                         </group>
                     </page>
-                    <page name="dropshipping" string="DistriSmart" attrs="{'invisible': [('ds_invoice','=',False)]}">
+                    <page name="dropshipping" string="DistriSmart" invisible="ds_invoice == False">
                         <group>
                             <group name='venice' string='Venice'>
                                 <field name="ds_invoice" invisible="1"/>
@@ -358,11 +353,7 @@
             </field>
         </record> -->
 
-        <menuitem 
-                name="SDT Configuration"
-                id="menu_papersmart"
-                parent="account.menu_finance_configuration"
-                sequence="105"/>
+
 
         <!-- <record id="view_account_invoice_supplier_tree_sdt" model="ir.ui.view">
             <field name="name">account.invoice.supplier.tree.sdt</field>
@@ -409,8 +400,8 @@
                         <field name='vat_declaration'/>
                         <field name='vat_check_date' readonly="1"/>
                         <field name='vat_issue_date' readonly="1"/>
-                        <field name='vat_period_id' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
-                        <field name='bill_type' attrs="{'readonly':[('vat_declaration','=','done')]}"/>
+                        <field name='vat_period_id' invisible="vat_declaration == 'done'"/>
+                        <field name='bill_type' invisible="vat_declaration == 'done'"/>
                     </xpath>
                     <xpath expr="//field[@name='incoterm_id']" position='before'>
                         <field name='analytic_product'/>
@@ -450,7 +441,7 @@
                         <field name='reason_for_cancellation' attrs="{'invisible': [('reason_for_cancellation','=', False)]}"/>
                     </xpath>
                     <xpath expr="//page[@name='other_info']" position='before'>
-                        <page name="paper_smart" string="PaperSmart" attrs="{'invisible': [('ppc_invoice','=',False)]}">
+                        <page name="paper_smart" string="PaperSmart" invisible="ppc_invoice == False">
                             <group>
                                 <group string='PaperSmart Import'>
                                     <field name="ppc_invoice" readonly="1"/>
@@ -505,7 +496,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page name="dropshipping" string="DistriSmart" attrs="{'invisible': [('ds_invoice','=',False)]}">
+                        <page name="dropshipping" string="DistriSmart" invisible="ds_invoice == False">
                             <group>
                                 <group name='venice' string='Venice'>
                                     <field name="ds_invoice" invisible="1"/>
@@ -734,7 +725,7 @@
         <record id="view_bank_statement_line_form_sdt" model="ir.ui.view">
             <field name="name">account.bank.statement.line.form.sdt</field>
             <field name="model">account.bank.statement.line</field>
-            <field name="inherit_id" ref="account.view_bank_statement_line_form"/>
+            <field name="inherit_id" ref="account_accountant.view_bank_statement_line_form_bank_rec_widget"/>
             <field name="arch" type="xml">
                 <field name="state" position="before">
                     <field name="kanban_state" string="Kanban State" widget="state_selection"/>
@@ -766,7 +757,7 @@
         <record id="view_bank_statement_line_tree_sdt" model="ir.ui.view">
             <field name="name">account.bank.statement.line.tree.sdt</field>
             <field name="model">account.bank.statement.line</field>
-            <field name="inherit_id" ref="account.view_bank_statement_line_tree"/>
+            <field name="inherit_id" ref="account_accountant.view_bank_statement_line_tree_bank_rec_widget"/>
             <field name="arch" type="xml">
                 <field name="narration" position="after">
                     <field name="kanban_state" string="Kanban State" widget="state_selection" optional="hide"/>
@@ -777,7 +768,7 @@
         <record id="view_account_bank_statement_line_filter_sdt" model="ir.ui.view">
             <field name="name">account.bank.statement.line.search.sdt</field>
             <field name="model">account.bank.statement.line</field>
-            <field name="inherit_id" ref="account.view_bank_statement_line_search"/>
+            <field name="inherit_id" ref="account_accountant.view_bank_statement_line_search_bank_rec_widget"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='transaction_type']" position="after">
                     <field name="kanban_state"/>
@@ -845,12 +836,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="PPC PaymentType"
-            id="menu_ppc_paymenttype"
-            parent="menu_papersmart"
-            action="action_ppc_paymenttype"
-            sequence="5"/>
+
 
         <record id="view_ppc_invoiceline_form" model="ir.ui.view">
             <field name="name">ppc.invoiceline.form</field>
@@ -892,12 +878,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="PPC Invoice Line"
-            id="menu_ppc_invocie_line"
-            parent="menu_papersmart"
-            action="action_ppc_invoiceline"
-            sequence="10"/>
+
 
         <record id="view_vat_period_form" model="ir.ui.view">
             <field name="name">vat.period.form</field>
@@ -941,12 +922,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="VAT Period"
-            id="menu_vat_period"
-            parent="menu_papersmart"
-            action="action_vat_period"
-            sequence="30"/>
+
 
         <!-- DS Script -->
         <record id="view_ds_script_form" model="ir.ui.view">
@@ -1005,20 +981,15 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="DS Script"
-            id="menu_ds_script"
-            parent="menu_papersmart"
-            action="action_ds_script"
-            sequence="40"/>
 
 
         <record id="view_bank_statement_form_sdt" model="ir.ui.view">
             <field name="name">view.bank.statement.form.sdt</field>
             <field name="model">account.bank.statement</field>
-            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="inherit_id" ref="account_accountant.view_bank_statement_form_bank_rec_widget"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='statement_line_ids']" position="after">
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
                     <page string="Market Place" name="market_place">
                         <group col="4" name='market_place'>
                             <field name="market_partner_id"/>
@@ -1038,14 +1009,15 @@
                                     <field name="amount"/>
                                 </tree>
                             </field>
-                        <!-- </group> -->
+                        <!-- </group> todo:mig-->
                     </page>
+                    </notebook>
                 </xpath>
-                <xpath
-                    expr="//form/sheet/notebook/page/field/tree/field[@name='partner_id']"
-                    position="before">
-                    <field name="partner_name" />
-                </xpath>
+<!--                <xpath-->
+<!--                    expr="//form/sheet/notebook/page/field/tree/field[@name='partner_id']"-->
+<!--                    position="before">-->
+<!--                    <field name="partner_name" /> todo:mig-->
+<!--                </xpath>-->
             </field>
         </record>
 
@@ -1094,12 +1066,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Department"
-            id="menu_invoice_department"
-            parent="menu_papersmart"
-            action="action_invoice_department"
-            sequence="80"/>
+
 
         <!-- Periode on invoice line -->
         <record id="view_invoice_periode_form" model="ir.ui.view">
@@ -1138,12 +1105,7 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="Periode"
-            id="menu_invoice_periode"
-            parent="menu_papersmart"
-            action="action_invoice_periode"
-            sequence="90"/>
+
 
         <!-- HR on invoice line -->
         <record id="view_invoice_hr_form" model="ir.ui.view">
@@ -1182,11 +1144,6 @@
             <field name="context">{}</field>
         </record>
 
-        <menuitem 
-            name="HR"
-            id="menu_invoice_hr"
-            parent="menu_papersmart"
-            action="action_invoice_hr"
-            sequence="100"/>
+
 
 </odoo>

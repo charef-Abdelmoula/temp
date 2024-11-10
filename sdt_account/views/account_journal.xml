@@ -18,8 +18,8 @@
                                 <field name="update_audit_status"/>
                             </group>
                             <group>
-                                <field name="single_partner" attrs="{'required': [('update_market_partner','=',True)]}"/>
-                                <field name="journal_partner_id" attrs="{'required': [('update_market_partner','=',True)]}"/>
+                                <field name="single_partner" required="update_market_partner == True"/>
+                                <field name="journal_partner_id" required="update_market_partner == True"/>
                                 <field name="department_id"/>
                             </group>
                         </group>
